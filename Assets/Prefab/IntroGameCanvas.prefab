@@ -200,8 +200,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Game Start
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 4f5a56c48e366ab47a7c4fab8c02f627, type: 2}
-  m_sharedMaterial: {fileID: 3791781325892639050, guid: 4f5a56c48e366ab47a7c4fab8c02f627, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: d60cfb1bafc0c48c3969546ddaa350e0, type: 2}
+  m_sharedMaterial: {fileID: 1465036886781904369, guid: d60cfb1bafc0c48c3969546ddaa350e0, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -225,8 +225,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 42
-  m_fontSizeBase: 42
+  m_fontSize: 50
+  m_fontSizeBase: 50
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

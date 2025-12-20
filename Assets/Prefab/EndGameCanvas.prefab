@@ -148,13 +148,14 @@ GameObject:
   - component: {fileID: 5608778347998404941}
   - component: {fileID: 2744607168860412760}
   - component: {fileID: 5607941372861921929}
+  - component: {fileID: 961709060593966070}
   m_Layer: 5
   m_Name: EndGameCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3679054776017062748
 RectTransform:
   m_ObjectHideFlags: 0
@@ -238,6 +239,18 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!225 &961709060593966070
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1056447072693705070}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1868127753930668727
 GameObject:
   m_ObjectHideFlags: 0
@@ -251,7 +264,7 @@ GameObject:
   - component: {fileID: 910505830928700345}
   - component: {fileID: 8343217557675429511}
   m_Layer: 5
-  m_Name: Restart Button (1)
+  m_Name: Retry Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -358,7 +371,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 910505830928700345}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: UIController, Assembly-CSharp
+        m_MethodName: OnRestartButtonClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &2019870343469552816
 GameObject:
   m_ObjectHideFlags: 0
@@ -513,7 +538,7 @@ GameObject:
   - component: {fileID: 4982716179420289537}
   - component: {fileID: 878867212186924380}
   m_Layer: 5
-  m_Name: Restart Button
+  m_Name: Go To Title Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1122,8 +1147,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278255392
-  m_fontColor: {r: 0.12673402, g: 1, b: 0, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:

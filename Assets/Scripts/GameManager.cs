@@ -68,6 +68,17 @@ public class GameManager : MonoBehaviour
         introCanvasGroup.blocksRaycasts = false;
 
         cameraAnimator.SetTrigger("GameStart");
+
+        while (!cameraAnimator.GetCurrentAnimatorStateInfo(0).IsName("Base Layer.ReadyCameraAnimation") ||
+               cameraAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f)
+        {
+            yield return null;
+        }
+
+        currentTimer = 60.0f;
+        gameCanvasGroup.gameObject.SetActive(true);
+        statusOverlay.SetStatus(snowmans[0]);
+        qteBar.SetSnowman(snowmans[0]);
     }
 
     void Awake()
@@ -87,10 +98,11 @@ public class GameManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        currentTimer = 60.0f;
-        statusOverlay.SetStatus(snowmans[0]);
-        qteBar.SetSnowman(snowmans[0]);
+        // currentTimer = 60.0f;
+        // statusOverlay.SetStatus(snowmans[0]);
+        // qteBar.SetSnowman(snowmans[0]);
     }
+
     // Update is called once per frame
     void Update()
     {
@@ -129,7 +141,7 @@ public class GameManager : MonoBehaviour
 
     void CheckSnowmanRespawn()
     {
-        if (snowmans[0].remainingBlockCount > 0)
+        if (!gameCanvasGroup.gameObject.activeInHierarchy || snowmans[0].remainingBlockCount > 0)
         {
             return;
         }
