@@ -39,28 +39,28 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
-            if (gameManager.TryHitProcess(KeyEnum.Right) || gameManager.TryHitProcess(KeyEnum.reverseLeft))
+            if (gameManager.TryHitProcess(KeyEnum.Right) || gameManager.TryHitProcess(KeyEnum.ReverseLeft))
             {
                 StartCoroutine(MovePlayerBodyRoutine(rightArm));
             }
         }
         else if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            if (gameManager.TryHitProcess(KeyEnum.Left) || gameManager.TryHitProcess(KeyEnum.reverseRight))
+            if (gameManager.TryHitProcess(KeyEnum.Left) || gameManager.TryHitProcess(KeyEnum.ReverseRight))
             {
                 StartCoroutine(MovePlayerBodyRoutine(leftArm));
             }
         }
         else if (Input.GetKeyDown(KeyCode.UpArrow))
         {
-            if (gameManager.TryHitProcess(KeyEnum.Up) || gameManager.TryHitProcess(KeyEnum.reverseDown))
+            if (gameManager.TryHitProcess(KeyEnum.Up) || gameManager.TryHitProcess(KeyEnum.ReverseDown))
             {
                 StartCoroutine(MovePlayerBodyRoutine(rightArm));
             }
         }
         else if (Input.GetKeyDown(KeyCode.DownArrow))
         {
-            if (gameManager.TryHitProcess(KeyEnum.Down) || gameManager.TryHitProcess(KeyEnum.reverseUp))
+            if (gameManager.TryHitProcess(KeyEnum.Down) || gameManager.TryHitProcess(KeyEnum.ReverseUp))
             {
                 // TODO: implement right leg
                 StartCoroutine(MovePlayerBodyRoutine(leftArm));

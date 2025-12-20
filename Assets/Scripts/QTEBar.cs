@@ -43,10 +43,10 @@ public class QTEBar : MonoBehaviour
         downBlock.GetComponent<Block>().BoundKeyEnum = KeyEnum.Down;
         leftBlock.GetComponent<Block>().BoundKeyEnum = KeyEnum.Left;
         rightBlock.GetComponent<Block>().BoundKeyEnum = KeyEnum.Right;
-        reverseUpBlock.GetComponent<Block>().BoundKeyEnum = KeyEnum.reverseUp;
-        reverseDownBlock.GetComponent<Block>().BoundKeyEnum = KeyEnum.reverseDown;
-        reverseLeftBlock.GetComponent<Block>().BoundKeyEnum = KeyEnum.reverseLeft;
-        reverseRightBlock.GetComponent<Block>().BoundKeyEnum = KeyEnum.reverseRight;
+        reverseUpBlock.GetComponent<Block>().BoundKeyEnum = KeyEnum.ReverseUp;
+        reverseDownBlock.GetComponent<Block>().BoundKeyEnum = KeyEnum.ReverseDown;
+        reverseLeftBlock.GetComponent<Block>().BoundKeyEnum = KeyEnum.ReverseLeft;
+        reverseRightBlock.GetComponent<Block>().BoundKeyEnum = KeyEnum.ReverseRight;
 
         for (int i = 0; i < 6; i++)
         {
@@ -70,19 +70,19 @@ public class QTEBar : MonoBehaviour
 
             GameObject reverseUpBlockInstantiated = GameObject.Instantiate(reverseUpBlock);
             reverseUpBlockInstantiated.transform.SetParent(transform, false);
-            reverseUpBlockInstantiated.GetComponent<Block>().BoundKeyEnum = KeyEnum.reverseUp;
+            reverseUpBlockInstantiated.GetComponent<Block>().BoundKeyEnum = KeyEnum.ReverseUp;
 
             GameObject reverseDownBlockInstantiated = GameObject.Instantiate(reverseDownBlock);
             reverseDownBlockInstantiated.transform.SetParent(transform, false);
-            reverseDownBlockInstantiated.GetComponent<Block>().BoundKeyEnum = KeyEnum.reverseDown;
+            reverseDownBlockInstantiated.GetComponent<Block>().BoundKeyEnum = KeyEnum.ReverseDown;
 
             GameObject reverseLeftBlockInstantiated = GameObject.Instantiate(reverseLeftBlock);
             reverseLeftBlockInstantiated.transform.SetParent(transform, false);
-            reverseLeftBlockInstantiated.GetComponent<Block>().BoundKeyEnum = KeyEnum.reverseLeft;
+            reverseLeftBlockInstantiated.GetComponent<Block>().BoundKeyEnum = KeyEnum.ReverseLeft;
 
             GameObject reverseRightBlockInstantiated = GameObject.Instantiate(reverseRightBlock); ;
             reverseRightBlockInstantiated.transform.SetParent(transform, false);
-            reverseRightBlockInstantiated.GetComponent<Block>().BoundKeyEnum = KeyEnum.reverseRight;
+            reverseRightBlockInstantiated.GetComponent<Block>().BoundKeyEnum = KeyEnum.ReverseRight;
 
 
             m_UpBlocks.Enqueue(upBlockInstantiated.GetComponent<Block>());
@@ -203,7 +203,7 @@ public class QTEBar : MonoBehaviour
                             continue;
                         }
                         block = m_ReverseUpBlocks.Dequeue();
-                        block.BoundKeyEnum = KeyEnum.reverseUp;
+                        block.BoundKeyEnum = KeyEnum.ReverseUp;
                         hasFound = true;
                         break;
                     }
@@ -214,7 +214,7 @@ public class QTEBar : MonoBehaviour
                             continue;
                         }
                         block = m_ReverseDownBlocks.Dequeue();
-                        block.BoundKeyEnum = KeyEnum.reverseDown;
+                        block.BoundKeyEnum = KeyEnum.ReverseDown;
                         hasFound = true;
                         break;
                     }
@@ -225,7 +225,7 @@ public class QTEBar : MonoBehaviour
                             continue;
                         }
                         block = m_ReverseLeftBlocks.Dequeue();
-                        block.BoundKeyEnum = KeyEnum.reverseLeft;
+                        block.BoundKeyEnum = KeyEnum.ReverseLeft;
                         hasFound = true;
                         break;
                     }
@@ -236,7 +236,7 @@ public class QTEBar : MonoBehaviour
                             continue;
                         }
                         block = m_ReverseRightBlocks.Dequeue();
-                        block.BoundKeyEnum = KeyEnum.reverseRight;
+                        block.BoundKeyEnum = KeyEnum.ReverseRight;
                         hasFound = true;
                         break;
                     }
@@ -276,22 +276,22 @@ public class QTEBar : MonoBehaviour
                         m_RightBlocks.Enqueue(block);
                         break;
                     }
-                case KeyEnum.reverseUp:
+                case KeyEnum.ReverseUp:
                     {
                         m_ReverseUpBlocks.Enqueue(block);
                         break;
                     }
-                case KeyEnum.reverseDown:
+                case KeyEnum.ReverseDown:
                     {
                         m_ReverseDownBlocks.Enqueue(block);
                         break;
                     }
-                case KeyEnum.reverseLeft:
+                case KeyEnum.ReverseLeft:
                     {
                         m_ReverseLeftBlocks.Enqueue(block);
                         break;
                     }
-                case KeyEnum.reverseRight:
+                case KeyEnum.ReverseRight:
                     {
                         m_ReverseRightBlocks.Enqueue(block);
                         break;

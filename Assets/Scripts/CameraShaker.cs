@@ -4,6 +4,8 @@ public class CameraShaker : MonoBehaviour
 {
     public float magnitude;
     public float duration;
+
+    public Animator animator;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -13,7 +15,7 @@ public class CameraShaker : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void ShakeCamera()
@@ -24,6 +26,7 @@ public class CameraShaker : MonoBehaviour
     System.Collections.IEnumerator ShakeRoutine()
     {
         Vector3 originalPos = transform.localPosition;
+
         float elapsed = 0.0f;
 
         while (elapsed < duration)
@@ -38,6 +41,6 @@ public class CameraShaker : MonoBehaviour
             yield return null; // 다음 프레임까지 대기
         }
 
-        transform.localPosition = originalPos;
+        transform.localPosition = new Vector3(originalPos.x, originalPos.y, originalPos.z);
     }
 }

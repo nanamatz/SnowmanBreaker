@@ -5,10 +5,10 @@ public enum KeyEnum
     Right,
     Down,
     Left,
-    reverseUp,
-    reverseRight,
-    reverseDown,
-    reverseLeft,
+    ReverseUp,
+    ReverseRight,
+    ReverseDown,
+    ReverseLeft,
 
 
     Count,

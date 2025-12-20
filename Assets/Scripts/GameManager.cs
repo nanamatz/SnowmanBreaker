@@ -82,6 +82,8 @@ public class GameManager : MonoBehaviour
         currentTimer = 60.0f;
         gameCanvasGroup.gameObject.SetActive(true);
         qteBar.SetSnowman(snowmans[0]);
+
+        cameraAnimator.enabled = false;
     }
 
     void Awake()
@@ -227,7 +229,7 @@ public class GameManager : MonoBehaviour
             if (UIController.instance != null)
             {
                 UIController.instance.ShowWrongInputFeedback();
-                mainCameraShaker.ShakeCamera();
+                //mainCameraShaker.ShakeCamera();
             }
         }
 

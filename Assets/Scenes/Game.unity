@@ -483,7 +483,6 @@ GameObject:
   m_Component:
   - component: {fileID: 330585546}
   - component: {fileID: 330585545}
-  - component: {fileID: 330585549}
   - component: {fileID: 330585544}
   - component: {fileID: 330585547}
   - component: {fileID: 330585548}
@@ -634,20 +633,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &330585549
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 330585543}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a6389b88110520041bcf09dcccdc5332, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CameraShaker
-  magnitude: 2
-  duration: 1
 --- !u!1 &406063062
 GameObject:
   m_ObjectHideFlags: 0
@@ -682,7 +667,7 @@ MonoBehaviour:
   introCanvasGroup: {fileID: 1458893131}
   gameCanvasGroup: {fileID: 1026110450}
   endCanvasGroup: {fileID: 66190469}
-  mainCameraShaker: {fileID: 330585549}
+  mainCameraShaker: {fileID: 0}
   snowmans:
   - {fileID: 1643087751}
   - {fileID: 9211745353377704575}
@@ -1873,6 +1858,17 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 66190469}
   m_SourcePrefab: {fileID: 100100000, guid: 99b7bbbea66ec4d4592db084e674fcba, type: 3}
+--- !u!114 &1913394941 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2495959019398931670, guid: 99b7bbbea66ec4d4592db084e674fcba, type: 3}
+  m_PrefabInstance: {fileID: 1765542515}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
 --- !u!1 &1960496931
 GameObject:
   m_ObjectHideFlags: 0
@@ -1905,7 +1901,7 @@ MonoBehaviour:
   m_LevelText: {fileID: 865038941}
   m_TimerText: {fileID: 1042302324}
   m_RemainBlockText: {fileID: 9168039131143006051}
-  m_BlockScoreText: {fileID: 0}
+  m_BrokenScoreText: {fileID: 1913394941}
   m_EndGameCanvas: {fileID: 66190464}
   m_WrongInputHighlight: {fileID: 0}
   m_BlockAlert: {fileID: 16348526}
