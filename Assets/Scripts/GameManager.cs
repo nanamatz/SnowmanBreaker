@@ -52,7 +52,37 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        UpdateTimer();
         CheckSnowmanRespawn();
+    }
+
+    void UpdateTimer()
+    {
+        if (currentTimer > 0)
+        {
+            currentTimer -= Time.deltaTime;
+            if (currentTimer <= 0)
+            {
+                currentTimer = 0;
+                GameOver();
+            }
+        }
+    }
+
+    void GameOver()
+    {
+        // 게임 오버 처리 로직 추가
+        if (UIController.instance != null)
+        {
+            UIController.instance.ShowEndGameCanvas();
+        }
+        
+        // PlayerController 비활성화
+        PlayerController playerController = FindFirstObjectByType<PlayerController>();
+        if (playerController != null)
+        {
+            playerController.enabled = false;
+        }
     }
 
     void CheckSnowmanRespawn()
@@ -81,6 +111,12 @@ public class GameManager : MonoBehaviour
         deadSnowman.Respawn(deadSnowman.level + snowmans.Count);
 
         statusOverlay.SetStatus(snowmans[0]);
+        
+        // UI 업데이트
+        if (UIController.instance != null)
+        {
+            UIController.instance.UpdateLevel();
+        }
     }
 
     private System.Collections.IEnumerator SnowmanMoveRoutine(Transform targetTransform, Vector3 offset)
