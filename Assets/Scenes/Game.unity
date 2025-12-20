@@ -1696,13 +1696,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AudioManager
   generalAudioSource: {fileID: 1413902978}
   hitClips:
-  - {fileID: 8300000, guid: 0147661c12ea814488259f82d4a4aed8, type: 3}
-  - {fileID: 8300000, guid: 0e270ecb84908054a9d6f727dbea974e, type: 3}
-  - {fileID: 8300000, guid: d0f166575306db84091dc03fce0eff69, type: 3}
-  - {fileID: 8300000, guid: 482611fe6bc559142a00be6e726b4862, type: 3}
-  - {fileID: 8300000, guid: a65d792d6907f744490c9b15bb70edfe, type: 3}
-  - {fileID: 8300000, guid: 58a5d36d6b134014ea5623d9802082e2, type: 3}
-  - {fileID: 8300000, guid: 74198389e177d0948b63ca9a3fb22801, type: 3}
+  - {fileID: 8300000, guid: d982ed62eb524e042814e3f5e6c45365, type: 3}
+  - {fileID: 8300000, guid: 9441aac338d9a2e4fb8af849b5fc0fe0, type: 3}
+  - {fileID: 8300000, guid: d0da27383b628e04799479cdd77eda95, type: 3}
+  - {fileID: 8300000, guid: 64b1dbeff75967b4bb6a10aa2bd3a1be, type: 3}
+  - {fileID: 8300000, guid: 793ce870ec4e6d84fbd6662d8b662c94, type: 3}
+  backgroundMusicClip: {fileID: 8300000, guid: 660790bb19a97eb4581a05d90c81f369, type: 3}
+  buttonClickClip: {fileID: 8300000, guid: b9eff218e132a4e76be78840eca96fb2, type: 3}
 --- !u!4 &1567413382
 Transform:
   m_ObjectHideFlags: 0
@@ -1860,10 +1860,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8343217557675429511, guid: 99b7bbbea66ec4d4592db084e674fcba, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8343217557675429511, guid: 99b7bbbea66ec4d4592db084e674fcba, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8343217557675429511, guid: 99b7bbbea66ec4d4592db084e674fcba, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8343217557675429511, guid: 99b7bbbea66ec4d4592db084e674fcba, type: 3}
@@ -1871,7 +1875,15 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1960496932}
     - target: {fileID: 8343217557675429511, guid: 99b7bbbea66ec4d4592db084e674fcba, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1567413381}
+    - target: {fileID: 8343217557675429511, guid: 99b7bbbea66ec4d4592db084e674fcba, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8343217557675429511, guid: 99b7bbbea66ec4d4592db084e674fcba, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8343217557675429511, guid: 99b7bbbea66ec4d4592db084e674fcba, type: 3}
@@ -1879,11 +1891,23 @@ PrefabInstance:
       value: OnRestartButtonClicked
       objectReference: {fileID: 0}
     - target: {fileID: 8343217557675429511, guid: 99b7bbbea66ec4d4592db084e674fcba, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: PlayButtonClickSound
+      objectReference: {fileID: 0}
+    - target: {fileID: 8343217557675429511, guid: 99b7bbbea66ec4d4592db084e674fcba, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: UIController, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 8343217557675429511, guid: 99b7bbbea66ec4d4592db084e674fcba, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: AudioManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8343217557675429511, guid: 99b7bbbea66ec4d4592db084e674fcba, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 8343217557675429511, guid: 99b7bbbea66ec4d4592db084e674fcba, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     m_RemovedComponents: []

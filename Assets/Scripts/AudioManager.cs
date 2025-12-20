@@ -10,6 +10,9 @@ public class AudioManager : MonoBehaviour
     public AudioSource generalAudioSource;
     public List<AudioClip> hitClips;
 
+    public AudioClip backgroundMusicClip;
+
+    public AudioClip buttonClickClip;
 
     void Awake()
     {
@@ -22,6 +25,32 @@ public class AudioManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
+    public void PlayBackgroundMusic()
+    {
+        if (generalAudioSource != null && backgroundMusicClip != null)
+        {
+            generalAudioSource.clip = backgroundMusicClip;
+            generalAudioSource.loop = true;
+            generalAudioSource.Play();
+        }
+        else
+        {
+            Debug.LogWarning("Background music source or clip is null!");
+        }
+    }
+
+    public void PlayButtonClickSound()
+    {
+        if (generalAudioSource != null && buttonClickClip != null)
+        {
+            generalAudioSource.PlayOneShot(buttonClickClip);
+        }
+        else
+        {
+            Debug.LogWarning("Button click source or clip is null!");
+        }
+    }
+
     public void PlayRandomHitSound()
     {
         if (generalAudioSource == null || hitClips.Count == 0)

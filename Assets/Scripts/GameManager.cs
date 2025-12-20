@@ -44,6 +44,7 @@ public class GameManager : MonoBehaviour
 
     public void GameStart()
     {
+        AudioManager.instance.PlayBackgroundMusic();
         StartCoroutine(FadeOutStartUI());
     }
 
@@ -188,13 +189,13 @@ public class GameManager : MonoBehaviour
         {
             float t = elapsed / duration;
 
-             t = t * t * (3f - 2f * t); 
+            t = t * t * (3f - 2f * t);
 
             targetTransform.localPosition = Vector3.Lerp(startPos, endPos, t);
 
             elapsed += Time.deltaTime;
 
-            yield return null; 
+            yield return null;
         }
 
         targetTransform.localPosition = endPos;
@@ -212,13 +213,13 @@ public class GameManager : MonoBehaviour
             // 블록 파괴 성공 시
             blockScore++;
             snowmans[0].remainingBlockCount--;
-            
+
             // 사운드 재생
             if (AudioManager.instance != null)
             {
                 AudioManager.instance.PlayRandomHitSound();
             }
-            
+
             // UI 업데이트
             if (UIController.instance != null)
             {
