@@ -43,7 +43,6 @@ public class Snowman : MonoBehaviour
         case 7:
         {
             PlayHitParticle(rightHandParticle);
-
             break;
         }
         case 8:
@@ -68,7 +67,7 @@ public class Snowman : MonoBehaviour
     }
 
     public void PlayHitParticle(ParticleSystem particle)
-    {
+    {        
         if (false == particle.gameObject.activeSelf)
         {
             particle.gameObject.SetActive(true);
