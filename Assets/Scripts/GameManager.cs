@@ -9,6 +9,9 @@ using static UnityEngine.GraphicsBuffer;
 
 public class GameManager : MonoBehaviour
 {
+    public Animator cameraAnimator;
+    public CanvasGroup startUICanvasGroup;
+
     public List<Snowman> snowmans;
     public StatusOverlay statusOverlay;
     public float moveDistance = 20.0f;
@@ -29,6 +32,32 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void GameStart()
+    {
+        StartCoroutine(FadeOutStartUI());
+    }
+
+    private System.Collections.IEnumerator FadeOutStartUI()
+    {
+        float fadeDuration = 2.0f;
+        float elapsed = 0f;
+        float startAlpha = startUICanvasGroup.alpha;
+
+        while (elapsed < fadeDuration)
+        {
+            elapsed += Time.deltaTime;
+            startUICanvasGroup.alpha = Mathf.Lerp(startAlpha, 0f, elapsed / fadeDuration);
+            yield return null;
+        }
+
+        startUICanvasGroup.alpha = 0f;
+        startUICanvasGroup.interactable = false;
+        startUICanvasGroup.blocksRaycasts = false;
+
+        cameraAnimator.SetTrigger("GameStart");
+    }
+
+    public void RecycleTargetKey()
     void Awake()
     {
         if (null == instance)
