@@ -687,8 +687,8 @@ MonoBehaviour:
   globalVolume: {fileID: 832575518}
   cameraAnimator: {fileID: 330585548}
   introCanvasGroup: {fileID: 1458893131}
-  gameCanvasGroup: {fileID: 0}
-  endCanvasGroup: {fileID: 0}
+  gameCanvasGroup: {fileID: 1026110450}
+  endCanvasGroup: {fileID: 1458893131}
   snowmans:
   - {fileID: 447924789}
   - {fileID: 1861477893}
