@@ -1,5 +1,7 @@
 {
     "recommendations": [
-      "visualstudiotoolsforunity.vstuc"
+        "visualstudiotoolsforunity.vstuc",
+        "google.gemini-cli-vscode-ide-companion",
+        "yzhang.markdown-all-in-one",
     ]
 }

@@ -1,4 +1,12 @@
 {
+    "window.restoreWindows": "none",
+    "terminal.integrated.enableMultiLinePasteWarning": "never",
+    "terminal.integrated.stickyScroll.enabled": false,
+    "explorer.confirmDelete": false,
+    "explorer.confirmDragAndDrop": false,
+    "editor.formatOnPaste": true,
+    "editor.formatOnSave": true,
+    "editor.codeLens": false,
     "files.exclude": {
         "**/.DS_Store": true,
         "**/.git": true,
@@ -60,12 +68,12 @@
         "*.asset": "yaml",
         "*.meta": "yaml",
         "*.prefab": "yaml",
-        "*.unity": "yaml",
+        "*.unity": "yaml"
     },
     "explorer.fileNesting.enabled": true,
     "explorer.fileNesting.patterns": {
         "*.sln": "*.csproj",
         "*.slnx": "*.csproj"
     },
-    "dotnet.defaultSolution": "SnowmanBreaker2.slnx"
+    "dotnet.defaultSolution": "SnowmanBreaker.slnx"
 }

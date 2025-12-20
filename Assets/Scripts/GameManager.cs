@@ -1,5 +1,6 @@
 using NUnit.Framework;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
@@ -11,10 +12,59 @@ public class GameManager : MonoBehaviour
     public float moveDistance = 20.0f;
     public float duration = 0.5f;
 
+    public int maxKeyQueueSize = 8;
+    public Queue<KeyEnum> TargetKeyQueue;
+
+    private Queue<KeyEnum> m_UpKeyPool;
+    private Queue<KeyEnum> m_DownKeyPool;
+    private Queue<KeyEnum> m_LeftKeyPool;
+    private Queue<KeyEnum> m_RightKeyPool;
+
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         statusOverlay.SetStatus(snowmans[0]);
+
+        TargetKeyQueue = new Queue<KeyEnum>();
+        m_UpKeyPool = new Queue<KeyEnum>(Enumerable.Repeat(KeyEnum.Up, 6));
+        m_DownKeyPool = new Queue<KeyEnum>(Enumerable.Repeat(KeyEnum.Down, 6));
+        m_LeftKeyPool = new Queue<KeyEnum>(Enumerable.Repeat(KeyEnum.Left, 6));
+        m_RightKeyPool = new Queue<KeyEnum>(Enumerable.Repeat(KeyEnum.Right, 6));
+        RefillTargetKey();
+    }
+
+    public void RecycleTargetKey()
+    {
+        KeyEnum keyEnum = TargetKeyQueue.Dequeue();
+
+        if (keyEnum == KeyEnum.Up)
+            m_UpKeyPool.Enqueue(keyEnum);
+        else if (keyEnum == KeyEnum.Down)
+            m_DownKeyPool.Enqueue(keyEnum);
+        else if (keyEnum == KeyEnum.Left)
+            m_LeftKeyPool.Enqueue(keyEnum);
+        else if (keyEnum == KeyEnum.Right)
+            m_RightKeyPool.Enqueue(keyEnum);
+
+        RefillTargetKey();
+    }
+
+    void RefillTargetKey()
+    {
+        while (TargetKeyQueue.Count != maxKeyQueueSize)
+        {
+            KeyEnum keyEnum = (KeyEnum)Random.Range(0, 3);
+
+            if (keyEnum == KeyEnum.Up && m_UpKeyPool.Count != 0)
+                TargetKeyQueue.Enqueue(m_UpKeyPool.Dequeue());
+            else if (keyEnum == KeyEnum.Down && m_DownKeyPool.Count != 0)
+                TargetKeyQueue.Enqueue(m_DownKeyPool.Dequeue());
+            else if (keyEnum == KeyEnum.Left && m_LeftKeyPool.Count != 0)
+                TargetKeyQueue.Enqueue(m_LeftKeyPool.Dequeue());
+            else if (keyEnum == KeyEnum.Right && m_RightKeyPool.Count != 0)
+                TargetKeyQueue.Enqueue(m_RightKeyPool.Dequeue());
+        }
     }
 
     // Update is called once per frame
@@ -34,7 +84,7 @@ public class GameManager : MonoBehaviour
         {
             if (obj != null)
             {
-                // °¢ ¿ÀºêÁ§Æ®º°·Î µ¶¸³ÀûÀÎ ÄÚ·çÆ¾ ½ÇÇà
+                // ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ú·ï¿½Æ¾ ï¿½ï¿½ï¿½ï¿½
                 StartCoroutine(SmoothMoveRoutine(obj.transform, Vector3.left * moveDistance));
             }
         }
@@ -60,22 +110,22 @@ public class GameManager : MonoBehaviour
 
         while (elapsed < duration)
         {
-            // ½Ã°£ Èå¸§¿¡ µû¸¥ ºñÀ² °è»ê (0 ~ 1)
+            // ï¿½Ã°ï¿½ ï¿½å¸§ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ (0 ~ 1)
             float t = elapsed / duration;
 
-            // ºÎµå·¯¿î °¡¼Ó/°¨¼Ó È¿°ú¸¦ ¿øÇÒ °æ¿ì (¼±ÅÃ »çÇ×)
+            // ï¿½Îµå·¯ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½/ï¿½ï¿½ï¿½ï¿½ È¿ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ (ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½)
             // t = t * t * (3f - 2f * t); 
 
             targetTransform.localPosition = Vector3.Lerp(startPos, endPos, t);
 
             elapsed += Time.deltaTime;
-            
-            yield return null; // ´ÙÀ½ ÇÁ·¹ÀÓ±îÁö ´ë±â
+
+            yield return null; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ó±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
         }
 
-        // ÃÖÁ¾ À§Ä¡ º¸Á¤
+        // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ ï¿½ï¿½ï¿½ï¿½
         targetTransform.localPosition = endPos;
-        if(endPos.x < -10.0f)
+        if (endPos.x < -10.0f)
         {
             targetTransform.localPosition = new Vector3(40.0f, 0.0f, 0.0f);
         }

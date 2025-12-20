@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Snowman : MonoBehaviour
@@ -13,6 +15,7 @@ public class Snowman : MonoBehaviour
     public float maxHp = 0;
     public float hp = 100;
 
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -26,35 +29,43 @@ public class Snowman : MonoBehaviour
 
     }
 
+    void OnTriggerEnter(Collider collider)
+    {
+        if (collider.gameObject.tag != "Player")
+        {
+            return;
+        }
+
+        OnHit(collider);
+    }
 
     public void OnHit(Collider collision)
     {
         hp -= 5;
-
         body.transform.localScale = new Vector3(5.0f, 5.0f * Mathf.Max(0.0f, Mathf.Min(1.0f, (hp / maxHp))), 5.0f);
         int layer = collision.gameObject.layer;
         switch (layer)
         {
-        case 6:
-        {
-            PlayHitParticle(leftHandParticle);
-            break;
-        }
-        case 7:
-        {
-            PlayHitParticle(rightHandParticle);
+            case 6:
+                {
+                    PlayHitParticle(leftHandParticle);
+                    break;
+                }
+            case 7:
+                {
+                    PlayHitParticle(rightHandParticle);
 
-            break;
-        }
-        case 8:
-        {
-            PlayHitParticle(leftFootParticle);
-            break;
-        }
-        default:
-        {
-            break;
-        }
+                    break;
+                }
+            case 8:
+                {
+                    PlayHitParticle(leftFootParticle);
+                    break;
+                }
+            default:
+                {
+                    break;
+                }
         }
 
 

@@ -1,5 +1,7 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+
 public class StatusOverlay : MonoBehaviour
 {
     public Snowman snowman;
@@ -8,6 +10,7 @@ public class StatusOverlay : MonoBehaviour
     static private float s_Epsilon = 1.732e-3f;
     private float m_MaxHp;
     private float m_CurHp;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -32,7 +35,7 @@ public class StatusOverlay : MonoBehaviour
     public void SetStatus(Snowman snowman)
     {
         this.snowman = snowman;
-        m_MaxHp = snowman.hp;
-        m_CurHp = snowman.hp;
+        m_MaxHp = snowman.maxHp;
+        m_CurHp = snowman.maxHp;
     }
 }
