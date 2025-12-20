@@ -11,7 +11,6 @@ public class UIController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI m_BlockScoreText;
 
     [SerializeField] private GameObject m_EndGameCanvas;
-    [SerializeField] private GameObject m_WrongInputHighlight;
 
     [SerializeField] private BlockAlert m_BlockAlert;
 
