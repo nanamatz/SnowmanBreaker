@@ -325,6 +325,7 @@ GameObject:
   - component: {fileID: 330585544}
   - component: {fileID: 330585547}
   - component: {fileID: 330585548}
+  - component: {fileID: 330585549}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -472,6 +473,21 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &330585549
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 330585543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6389b88110520041bcf09dcccdc5332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CameraShaker
+  magnitude: 0.05
+  duration: 0.25
+  animator: {fileID: 0}
 --- !u!1 &406063062
 GameObject:
   m_ObjectHideFlags: 0
@@ -506,7 +522,7 @@ MonoBehaviour:
   introCanvasGroup: {fileID: 1458893131}
   gameCanvasGroup: {fileID: 1026110450}
   endCanvasGroup: {fileID: 66190469}
-  mainCameraShaker: {fileID: 0}
+  mainCameraShaker: {fileID: 330585549}
   snowmans:
   - {fileID: 1643087751}
   - {fileID: 9211745353377704575}
@@ -516,6 +532,7 @@ MonoBehaviour:
   qteBar: {fileID: 475162910}
   currentTimer: 0
   blockScore: 0
+  isGameStarted: 0
   reverseBlockMinLevel: 4
 --- !u!4 &406063064
 Transform:
@@ -1166,7 +1183,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 0
-  m_AdditionalShaderChannelsFlag: 25
+  m_AdditionalShaderChannelsFlag: 1
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
@@ -1737,7 +1754,7 @@ MonoBehaviour:
   m_LevelText: {fileID: 865038941}
   m_TimerText: {fileID: 1042302324}
   m_RemainBlockText: {fileID: 9168039131143006051}
-  m_BrokenScoreText: {fileID: 1913394941}
+  m_BlockScoreText: {fileID: 1913394941}
   m_EndGameCanvas: {fileID: 66190464}
   m_WrongInputHighlight: {fileID: 0}
   m_BlockAlert: {fileID: 16348526}
@@ -2421,7 +2438,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5677971826377644038, guid: 7fef70b3cd94f744180e9f3d760ea9b2, type: 3}
       propertyPath: m_Pivot.y
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5677971826377644038, guid: 7fef70b3cd94f744180e9f3d760ea9b2, type: 3}
       propertyPath: m_AnchorMax.x
@@ -2429,7 +2446,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5677971826377644038, guid: 7fef70b3cd94f744180e9f3d760ea9b2, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5677971826377644038, guid: 7fef70b3cd94f744180e9f3d760ea9b2, type: 3}
       propertyPath: m_AnchorMin.x
@@ -2437,7 +2454,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5677971826377644038, guid: 7fef70b3cd94f744180e9f3d760ea9b2, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5677971826377644038, guid: 7fef70b3cd94f744180e9f3d760ea9b2, type: 3}
       propertyPath: m_SizeDelta.x
@@ -2481,7 +2498,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5677971826377644038, guid: 7fef70b3cd94f744180e9f3d760ea9b2, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -450
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 5677971826377644038, guid: 7fef70b3cd94f744180e9f3d760ea9b2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

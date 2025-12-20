@@ -152,45 +152,4 @@ public class UIController : MonoBehaviour
             m_BlockAlert.Alert();
         }
     }
-
-    IEnumerator WrongInputHighlightEffect()
-    {
-        if (m_WrongInputHighlight == null) yield break;
-
-        m_WrongInputHighlight.SetActive(true);
-        
-        float duration = 1.0f;
-        float elapsed = 0f;
-        Vector3 originalScale = m_WrongInputHighlight.transform.localScale;
-        
-        // 반짝반짝 + 크기 변화 효과
-        while (elapsed < duration)
-        {
-            float progress = elapsed / duration;
-            
-            // 반짝반짝 효과 (알파 값 변화)
-            CanvasGroup canvasGroup = m_WrongInputHighlight.GetComponent<CanvasGroup>();
-            if (canvasGroup != null)
-            {
-                float alpha = Mathf.PingPong(Time.time * 8f, 1f); // 빠른 깜빡임
-                canvasGroup.alpha = alpha;
-            }
-            
-            // 크기 변화 효과 (펄스)
-            float scale = 1f + Mathf.Sin(Time.time * 10f) * 0.2f; // 펄스 효과
-            m_WrongInputHighlight.transform.localScale = originalScale * scale;
-            
-            elapsed += Time.deltaTime;
-            yield return null;
-        }
-        
-        // 원래 상태로 복구 후 비활성화
-        m_WrongInputHighlight.transform.localScale = originalScale;
-        CanvasGroup finalCanvasGroup = m_WrongInputHighlight.GetComponent<CanvasGroup>();
-        if (finalCanvasGroup != null)
-        {
-            finalCanvasGroup.alpha = 1f;
-        }
-        m_WrongInputHighlight.SetActive(false);
-    }
 }
