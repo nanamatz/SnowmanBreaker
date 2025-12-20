@@ -23,6 +23,7 @@ public class SnowmanCollisionChecker : MonoBehaviour
             return;
         }
 
-        parent.OnHit(collider);
+        PlayerController controller = collider.GetComponentInParent<PlayerController>();
+        parent.OnHit(collider, controller.lastPressedKey);
     }
 }

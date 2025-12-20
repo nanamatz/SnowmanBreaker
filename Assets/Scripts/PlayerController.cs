@@ -12,6 +12,8 @@ public class PlayerController : MonoBehaviour
     public float moveDistance = 1.0f;
     public float moveSpeed = 0.05f;
 
+    public KeyEnum lastPressedKey;
+
     private bool m_IsMoving = false;
 
     private Transform m_LeftArmTransform;
@@ -41,14 +43,17 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
+            lastPressedKey = KeyEnum.Right;
             StartCoroutine(MovePlayerBodyRoutine(rightArm));
         }
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
+            lastPressedKey = KeyEnum.Left;
             StartCoroutine(MovePlayerBodyRoutine(leftArm));
         }
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
+            lastPressedKey = KeyEnum.Up;
             StartCoroutine(MovePlayerBodyRoutine(leftLeg));
         }
     }
@@ -78,16 +83,16 @@ public class PlayerController : MonoBehaviour
             direction = targetTransform.localRotation * Vector3.forward;
         }
 
-        // 1. ¸ñÇ¥ À§Ä¡ °è»ê (·ÎÄÃ ZÃà ¹æÇâ)
+        // 1. ï¿½ï¿½Ç¥ ï¿½ï¿½Ä¡ ï¿½ï¿½ï¿½ (ï¿½ï¿½ï¿½ï¿½ Zï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½)
         Vector3 targetLocalPos = startLocalPos + direction * moveDistance;
 
-        // 2. ÀüÁø (Fast Move Out)
+        // 2. ï¿½ï¿½ï¿½ï¿½ (Fast Move Out)
         yield return StartCoroutine(LerpPosition(targetTransform, startLocalPos, targetLocalPos, 0.05f));
 
-        // 3. º¹±Í (Fast Move Back)
+        // 3. ï¿½ï¿½ï¿½ï¿½ (Fast Move Back)
         yield return StartCoroutine(LerpPosition(targetTransform, targetLocalPos, startLocalPos, 0.05f));
 
-        targetTransform.localPosition = startLocalPos; // ºÎµ¿ ¼Ò¼öÁ¡ ¿ÀÂ÷ ¹æÁö
+        targetTransform.localPosition = startLocalPos; // ï¿½Îµï¿½ ï¿½Ò¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         m_IsMoving = false;
     }
 

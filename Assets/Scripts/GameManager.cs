@@ -25,7 +25,8 @@ public class GameManager : MonoBehaviour
 
     void CheckSnowmanRespawn()
     {
-        if (snowmans[0].hp > 0.2f)
+        // if (snowmans[0].hp > 0.2f)
+        if (snowmans[0].qteQueue.Count != 0)
         {
             return;
         }
@@ -34,7 +35,7 @@ public class GameManager : MonoBehaviour
         {
             if (obj != null)
             {
-                // °¢ ¿ÀºêÁ§Æ®º°·Î µ¶¸³ÀûÀÎ ÄÚ·çÆ¾ ½ÇÇà
+                // ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ú·ï¿½Æ¾ ï¿½ï¿½ï¿½ï¿½
                 StartCoroutine(SmoothMoveRoutine(obj.transform, Vector3.left * moveDistance));
             }
         }
@@ -60,22 +61,22 @@ public class GameManager : MonoBehaviour
 
         while (elapsed < duration)
         {
-            // ½Ã°£ Èå¸§¿¡ µû¸¥ ºñÀ² °è»ê (0 ~ 1)
+            // ï¿½Ã°ï¿½ ï¿½å¸§ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ (0 ~ 1)
             float t = elapsed / duration;
 
-            // ºÎµå·¯¿î °¡¼Ó/°¨¼Ó È¿°ú¸¦ ¿øÇÒ °æ¿ì (¼±ÅÃ »çÇ×)
+            // ï¿½Îµå·¯ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½/ï¿½ï¿½ï¿½ï¿½ È¿ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ (ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½)
             // t = t * t * (3f - 2f * t); 
 
             targetTransform.localPosition = Vector3.Lerp(startPos, endPos, t);
 
             elapsed += Time.deltaTime;
-            
-            yield return null; // ´ÙÀ½ ÇÁ·¹ÀÓ±îÁö ´ë±â
+
+            yield return null; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ó±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
         }
 
-        // ÃÖÁ¾ À§Ä¡ º¸Á¤
+        // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ ï¿½ï¿½ï¿½ï¿½
         targetTransform.localPosition = endPos;
-        if(endPos.x < -10.0f)
+        if (endPos.x < -10.0f)
         {
             targetTransform.localPosition = new Vector3(40.0f, 0.0f, 0.0f);
         }
