@@ -93,7 +93,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 112000000, guid: 92c6ea1be1ffc4d10aaa989af5da6587, type: 2}
+  m_LightingDataAsset: {fileID: 112000000, guid: ffd911c8426ce463286f95834f670638, type: 2}
   m_LightingSettings: {fileID: 4890085278179872738, guid: 38923fbce7574b6458a81cdb924ea14d, type: 2}
 --- !u!196 &4
 NavMeshSettings:
@@ -356,14 +356,6 @@ PrefabInstance:
     - target: {fileID: 4984444669274794, guid: 7c1543f51c5b8cc488fc53ab3cbffbb1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: -106.732
-      objectReference: {fileID: 0}
-    - target: {fileID: 23364810675174388, guid: 7c1543f51c5b8cc488fc53ab3cbffbb1, type: 3}
-      propertyPath: m_ScaleInLightmap
-      value: 0.5872565
-      objectReference: {fileID: 0}
-    - target: {fileID: 23483372429715836, guid: 7c1543f51c5b8cc488fc53ab3cbffbb1, type: 3}
-      propertyPath: m_ScaleInLightmap
-      value: 0.5976719
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
