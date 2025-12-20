@@ -18,7 +18,6 @@ public class GameManager : MonoBehaviour
     public CanvasGroup endCanvasGroup;
 
     public List<Snowman> snowmans;
-    public StatusOverlay statusOverlay;
     public float moveDistance = 20.0f;
     public float duration = 0.5f;
     public QTEBar qteBar;
@@ -27,6 +26,7 @@ public class GameManager : MonoBehaviour
     public int blockScore = 0;
 
     private static GameManager instance;
+    [SerializeField] public int reverseBlockMinLevel = 4; // reverse block이 등장하는 최소 레벨
 
     public static GameManager Instance
     {
@@ -164,7 +164,6 @@ public class GameManager : MonoBehaviour
         var deadSnowman = snowmans[snowmans.Count - 1];
         deadSnowman.Respawn(deadSnowman.level + snowmans.Count);
 
-        statusOverlay.SetStatus(snowmans[0]);
         qteBar.SetSnowman(snowmans[0]);
 
 
