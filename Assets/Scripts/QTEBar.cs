@@ -30,11 +30,11 @@ public class QTEBar : MonoBehaviour
     private Queue<Block> m_LeftBlocks = new Queue<Block>();
     private Queue<Block> m_RightBlocks = new Queue<Block>();
 
-    private List<Block> m_visibleBlocks = new List<Block>();
-
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
+        m_VisibleBlockLists = new Block[visibleBlockListCount];
+
         upBlock.GetComponent<Block>().BoundKeyEnum = KeyEnum.Up;
         downBlock.GetComponent<Block>().BoundKeyEnum = KeyEnum.Down;
         leftBlock.GetComponent<Block>().BoundKeyEnum = KeyEnum.Left;
@@ -121,48 +121,48 @@ public class QTEBar : MonoBehaviour
             int randomIndex = Random.Range(0, 4);
             switch (randomIndex)
             {
-            case 0:
-            {
-                if (m_UpBlocks.Count == 0)
-                {
-                    continue;
-                }
-                block = m_UpBlocks.Dequeue();
-                block.BoundKeyEnum = KeyEnum.Up;
-                hasFound = true;
-                break;
-            }
-            case 1:
-            {
-                if (m_DownBlocks.Count == 0)
-                {
-                    continue;
-                }
-                block = m_DownBlocks.Dequeue();
-                block.BoundKeyEnum = KeyEnum.Down;
-                hasFound = true;
-                break;
-            }
-            case 2:
-            {
-                if (m_RightBlocks.Count == 0)
-                {
-                    continue;
-                }
-                block = m_RightBlocks.Dequeue();
-                hasFound = true;
-                break;
-            }
-            case 3:
-            {
-                if (m_LeftBlocks.Count == 0)
-                {
-                    continue;
-                }
-                block = m_LeftBlocks.Dequeue();
-                hasFound = true;
-                break;
-            }
+                case 0:
+                    {
+                        if (m_UpBlocks.Count == 0)
+                        {
+                            continue;
+                        }
+                        block = m_UpBlocks.Dequeue();
+                        block.BoundKeyEnum = KeyEnum.Up;
+                        hasFound = true;
+                        break;
+                    }
+                case 1:
+                    {
+                        if (m_DownBlocks.Count == 0)
+                        {
+                            continue;
+                        }
+                        block = m_DownBlocks.Dequeue();
+                        block.BoundKeyEnum = KeyEnum.Down;
+                        hasFound = true;
+                        break;
+                    }
+                case 2:
+                    {
+                        if (m_RightBlocks.Count == 0)
+                        {
+                            continue;
+                        }
+                        block = m_RightBlocks.Dequeue();
+                        hasFound = true;
+                        break;
+                    }
+                case 3:
+                    {
+                        if (m_LeftBlocks.Count == 0)
+                        {
+                            continue;
+                        }
+                        block = m_LeftBlocks.Dequeue();
+                        hasFound = true;
+                        break;
+                    }
             }
         }
         return block;
@@ -179,30 +179,30 @@ public class QTEBar : MonoBehaviour
         {
             switch (block.BoundKeyEnum)
             {
-            case KeyEnum.Up:
-            {
-                m_UpBlocks.Enqueue(block);
-                break;
-            }
-            case KeyEnum.Down:
-            {
-                m_DownBlocks.Enqueue(block);
-                break;
-            }
-            case KeyEnum.Left:
-            {
-                m_LeftBlocks.Enqueue(block);
-                break;
-            }
-            case KeyEnum.Right:
-            {
-                m_RightBlocks.Enqueue(block);
-                break;
-            }
-            default:
-            {
-                break;
-            }
+                case KeyEnum.Up:
+                    {
+                        m_UpBlocks.Enqueue(block);
+                        break;
+                    }
+                case KeyEnum.Down:
+                    {
+                        m_DownBlocks.Enqueue(block);
+                        break;
+                    }
+                case KeyEnum.Left:
+                    {
+                        m_LeftBlocks.Enqueue(block);
+                        break;
+                    }
+                case KeyEnum.Right:
+                    {
+                        m_RightBlocks.Enqueue(block);
+                        break;
+                    }
+                default:
+                    {
+                        break;
+                    }
             }
         }
     }
