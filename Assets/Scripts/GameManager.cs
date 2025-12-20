@@ -48,8 +48,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         statusOverlay.SetStatus(snowmans[0]);
-        qteBar.SetRemainingBlockCount(snowmans[0].remainingBlockCount);
-        currentTimer = 60.0f;
+        qteBar.SetSnowman(snowmans[0]);
     }
     // Update is called once per frame
     void Update()
@@ -113,13 +112,7 @@ public class GameManager : MonoBehaviour
         deadSnowman.Respawn(deadSnowman.level + snowmans.Count);
 
         statusOverlay.SetStatus(snowmans[0]);
-
-        // UI 업데이트
-        if (UIController.instance != null)
-        {
-            UIController.instance.UpdateLevel();
-        }
-
+        qteBar.SetSnowman(snowmans[0]);
     }
 
     private System.Collections.IEnumerator SnowmanMoveRoutine(Transform targetTransform, Vector3 offset)
