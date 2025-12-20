@@ -13,7 +13,7 @@ public interface IBreakable
 
 public class Block : MonoBehaviour, IBreakable
 {
-    protected KeyEnum m_BoundKeyEnum;
+    [SerializeField] protected KeyEnum m_BoundKeyEnum;
     public KeyEnum BoundKeyEnum { get => m_BoundKeyEnum; set => m_BoundKeyEnum = value;  }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
