@@ -7,7 +7,6 @@ public class PlayerController : MonoBehaviour
 {
     public GameObject leftArm;
     public GameObject rightArm;
-    public GameObject leftLeg;
 
     public float moveDistance = 1.0f;
     public float moveSpeed = 0.05f;

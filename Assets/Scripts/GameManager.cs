@@ -18,7 +18,6 @@ public class GameManager : MonoBehaviour
     public CanvasGroup endCanvasGroup;
 
     public List<Snowman> snowmans;
-    public StatusOverlay statusOverlay;
     public float moveDistance = 20.0f;
     public float duration = 0.5f;
     public QTEBar qteBar;
@@ -88,7 +87,6 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         currentTimer = 60.0f;
-        statusOverlay.SetStatus(snowmans[0]);
         qteBar.SetSnowman(snowmans[0]);
     }
     // Update is called once per frame
@@ -152,7 +150,6 @@ public class GameManager : MonoBehaviour
         var deadSnowman = snowmans[snowmans.Count - 1];
         deadSnowman.Respawn(deadSnowman.level + snowmans.Count);
 
-        statusOverlay.SetStatus(snowmans[0]);
         qteBar.SetSnowman(snowmans[0]);
 
 
