@@ -2,7 +2,9 @@ using NUnit.Framework;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 using static UnityEngine.GraphicsBuffer;
 
 public class GameManager : MonoBehaviour
@@ -14,27 +16,20 @@ public class GameManager : MonoBehaviour
     public StatusOverlay statusOverlay;
     public float moveDistance = 20.0f;
     public float duration = 0.5f;
+    public QTEBar qteBar;
 
-    public int maxKeyQueueSize = 8;
-    public Queue<KeyEnum> TargetKeyQueue;
+    private static GameManager instance;
 
-    private Queue<KeyEnum> m_UpKeyPool;
-    private Queue<KeyEnum> m_DownKeyPool;
-    private Queue<KeyEnum> m_LeftKeyPool;
-    private Queue<KeyEnum> m_RightKeyPool;
-
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public static GameManager Instance
     {
-        statusOverlay.SetStatus(snowmans[0]);
-
-        TargetKeyQueue = new Queue<KeyEnum>();
-        m_UpKeyPool = new Queue<KeyEnum>(Enumerable.Repeat(KeyEnum.Up, 6));
-        m_DownKeyPool = new Queue<KeyEnum>(Enumerable.Repeat(KeyEnum.Down, 6));
-        m_LeftKeyPool = new Queue<KeyEnum>(Enumerable.Repeat(KeyEnum.Left, 6));
-        m_RightKeyPool = new Queue<KeyEnum>(Enumerable.Repeat(KeyEnum.Right, 6));
-        RefillTargetKey();
+        get
+        {
+            if (null == instance)
+            {
+                return null;
+            }
+            return instance;
+        }
     }
 
     public void GameStart()
@@ -63,38 +58,26 @@ public class GameManager : MonoBehaviour
     }
 
     public void RecycleTargetKey()
+    void Awake()
     {
-        KeyEnum keyEnum = TargetKeyQueue.Dequeue();
-
-        if (keyEnum == KeyEnum.Up)
-            m_UpKeyPool.Enqueue(keyEnum);
-        else if (keyEnum == KeyEnum.Down)
-            m_DownKeyPool.Enqueue(keyEnum);
-        else if (keyEnum == KeyEnum.Left)
-            m_LeftKeyPool.Enqueue(keyEnum);
-        else if (keyEnum == KeyEnum.Right)
-            m_RightKeyPool.Enqueue(keyEnum);
-
-        RefillTargetKey();
-    }
-
-    void RefillTargetKey()
-    {
-        while (TargetKeyQueue.Count != maxKeyQueueSize)
+        if (null == instance)
         {
-            KeyEnum keyEnum = (KeyEnum)Random.Range(0, 3);
+            instance = this;
 
-            if (keyEnum == KeyEnum.Up && m_UpKeyPool.Count != 0)
-                TargetKeyQueue.Enqueue(m_UpKeyPool.Dequeue());
-            else if (keyEnum == KeyEnum.Down && m_DownKeyPool.Count != 0)
-                TargetKeyQueue.Enqueue(m_DownKeyPool.Dequeue());
-            else if (keyEnum == KeyEnum.Left && m_LeftKeyPool.Count != 0)
-                TargetKeyQueue.Enqueue(m_LeftKeyPool.Dequeue());
-            else if (keyEnum == KeyEnum.Right && m_RightKeyPool.Count != 0)
-                TargetKeyQueue.Enqueue(m_RightKeyPool.Dequeue());
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
         }
     }
 
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
+    {
+        statusOverlay.SetStatus(snowmans[0]);
+        qteBar.RemainingBlockCount = snowmans[0].remainBlockCount;
+    }
     // Update is called once per frame
     void Update()
     {
@@ -103,7 +86,7 @@ public class GameManager : MonoBehaviour
 
     void CheckSnowmanRespawn()
     {
-        if (snowmans[0].hp > 0.2f)
+        if (snowmans[0].remainBlockCount > 0)
         {
             return;
         }
@@ -112,8 +95,7 @@ public class GameManager : MonoBehaviour
         {
             if (obj != null)
             {
-                // �� ������Ʈ���� �������� �ڷ�ƾ ����
-                StartCoroutine(SmoothMoveRoutine(obj.transform, Vector3.left * moveDistance));
+                StartCoroutine(SnowmanMoveRoutine(obj.transform, Vector3.left * moveDistance));
             }
         }
 
@@ -130,7 +112,7 @@ public class GameManager : MonoBehaviour
         statusOverlay.SetStatus(snowmans[0]);
     }
 
-    private System.Collections.IEnumerator SmoothMoveRoutine(Transform targetTransform, Vector3 offset)
+    private System.Collections.IEnumerator SnowmanMoveRoutine(Transform targetTransform, Vector3 offset)
     {
         Vector3 startPos = targetTransform.localPosition;
         Vector3 endPos = startPos + offset;
@@ -157,5 +139,12 @@ public class GameManager : MonoBehaviour
         {
             targetTransform.localPosition = new Vector3(40.0f, 0.0f, 0.0f);
         }
+    }
+
+    public bool TryHitProcess(KeyEnum keyEnum)
+    {
+        IBreakable.Status status = qteBar.TryProcess(keyEnum);
+
+        return IBreakable.Status.NotInteracted == status;
     }
 }

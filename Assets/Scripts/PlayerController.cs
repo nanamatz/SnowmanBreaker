@@ -44,28 +44,30 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
-            if (gameManager.TargetKeyQueue.Peek() == KeyEnum.Right)
-            {
-                gameManager.RecycleTargetKey();
-                StartCoroutine(MovePlayerBodyRoutine(rightArm));
-            }
+            gameManager.TryHitProcess(KeyEnum.Right);
         }
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            if (gameManager.TargetKeyQueue.Peek() == KeyEnum.Left)
+            if (gameManager.TryHitProcess(KeyEnum.Left))
             {
-                gameManager.RecycleTargetKey();
                 StartCoroutine(MovePlayerBodyRoutine(leftArm));
             }
         }
-        if (Input.GetKeyDown(KeyCode.UpArrow))
+        if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.DownArrow))
         {
-            if (gameManager.TargetKeyQueue.Peek() == KeyEnum.Up)
+            if (gameManager.TryHitProcess(KeyEnum.Up))
             {
-                gameManager.RecycleTargetKey();
                 StartCoroutine(MovePlayerBodyRoutine(leftLeg));
             }
         }
+        // TODO: implement right leg
+        //if (Input.GetKeyDown(KeyCode.DownArrow))
+        //{
+        //    if(gameManager.TryHitProcess(KeyEnum.Down))
+        //    {
+        //        StartCoroutine(MovePlayerBodyRoutine(leftLeg));
+        //    }
+        //}
     }
 
     IEnumerator MovePlayerBodyRoutine(GameObject playerBody)
