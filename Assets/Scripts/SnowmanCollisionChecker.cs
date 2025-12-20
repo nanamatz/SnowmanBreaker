@@ -16,14 +16,5 @@ public class SnowmanCollisionChecker : MonoBehaviour
 
     }
 
-    void OnTriggerEnter(Collider collider)
-    {
-        if (collider.gameObject.tag != "Player")
-        {
-            return;
-        }
 
-        PlayerController controller = collider.GetComponentInParent<PlayerController>();
-        parent.OnHit(collider, controller.lastPressedKey);
-    }
 }

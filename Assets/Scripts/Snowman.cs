@@ -12,23 +12,15 @@ public class Snowman : MonoBehaviour
 
     public int level = 1;
 
-    // public float maxHp = 0;
-    // public float hp = 100;
+    public float maxHp = 0;
+    public float hp = 100;
 
-    public int qteMaxCount;
-    public Queue<KeyEnum> qteQueue;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        // maxHp = level * 100.0f;
-        // hp = maxHp;
-        qteMaxCount = level * 10;
-        qteQueue = new Queue<KeyEnum>();
-        for (int i = 0; i < qteMaxCount; i++)
-        {
-            qteQueue.Enqueue((KeyEnum)Random.Range(0, 3));
-        }
+        maxHp = level * 100.0f;
+        hp = maxHp;
     }
 
     // Update is called once per frame
@@ -37,16 +29,20 @@ public class Snowman : MonoBehaviour
 
     }
 
-
-    public void OnHit(Collider collision, KeyEnum lastPressedKey)
+    void OnTriggerEnter(Collider collider)
     {
-        // hp -= 5;
-        // body.transform.localScale = new Vector3(5.0f, 5.0f * Mathf.Max(0.0f, Mathf.Min(1.0f, (hp / maxHp))), 5.0f);
-        if (qteQueue.Peek() != lastPressedKey)
+        if (collider.gameObject.tag != "Player")
+        {
             return;
+        }
 
-        qteQueue.Dequeue();
-        body.transform.localScale = new Vector3(5.0f, 5.0f * Mathf.Max(0.0f, Mathf.Min(1.0f, ((float)qteQueue.Count / (float)qteMaxCount))), 5.0f);
+        OnHit(collider);
+    }
+
+    public void OnHit(Collider collision)
+    {
+        hp -= 5;
+        body.transform.localScale = new Vector3(5.0f, 5.0f * Mathf.Max(0.0f, Mathf.Min(1.0f, (hp / maxHp))), 5.0f);
         int layer = collision.gameObject.layer;
         switch (layer)
         {
@@ -96,14 +92,8 @@ public class Snowman : MonoBehaviour
     public void Respawn(int respawnLevel)
     {
         level = respawnLevel;
-        // maxHp = level * 100.0f;
-        // hp = maxHp;
-        qteMaxCount = level * 10;
-        qteQueue = new Queue<KeyEnum>();
-        for (int i = 0; i < qteMaxCount; i++)
-        {
-            qteQueue.Enqueue((KeyEnum)Random.Range(0, 3));
-        }
+        maxHp = level * 100.0f;
+        hp = maxHp;
         body.transform.localScale = new Vector3(5.0f, 5.0f, 5.0f);
 
     }

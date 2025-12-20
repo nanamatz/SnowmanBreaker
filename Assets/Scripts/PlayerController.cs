@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     public float moveSpeed = 0.05f;
 
     public KeyEnum lastPressedKey;
+    public GameManager gameManager;
 
     private bool m_IsMoving = false;
 
@@ -43,18 +44,27 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
-            lastPressedKey = KeyEnum.Right;
-            StartCoroutine(MovePlayerBodyRoutine(rightArm));
+            if (gameManager.TargetKeyQueue.Peek() == KeyEnum.Right)
+            {
+                gameManager.RecycleTargetKey();
+                StartCoroutine(MovePlayerBodyRoutine(rightArm));
+            }
         }
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            lastPressedKey = KeyEnum.Left;
-            StartCoroutine(MovePlayerBodyRoutine(leftArm));
+            if (gameManager.TargetKeyQueue.Peek() == KeyEnum.Left)
+            {
+                gameManager.RecycleTargetKey();
+                StartCoroutine(MovePlayerBodyRoutine(leftArm));
+            }
         }
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
-            lastPressedKey = KeyEnum.Up;
-            StartCoroutine(MovePlayerBodyRoutine(leftLeg));
+            if (gameManager.TargetKeyQueue.Peek() == KeyEnum.Up)
+            {
+                gameManager.RecycleTargetKey();
+                StartCoroutine(MovePlayerBodyRoutine(leftLeg));
+            }
         }
     }
 

@@ -1,5 +1,6 @@
 using NUnit.Framework;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
@@ -11,10 +12,59 @@ public class GameManager : MonoBehaviour
     public float moveDistance = 20.0f;
     public float duration = 0.5f;
 
+    public int maxKeyQueueSize = 8;
+    public Queue<KeyEnum> TargetKeyQueue;
+
+    private Queue<KeyEnum> m_UpKeyPool;
+    private Queue<KeyEnum> m_DownKeyPool;
+    private Queue<KeyEnum> m_LeftKeyPool;
+    private Queue<KeyEnum> m_RightKeyPool;
+
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         statusOverlay.SetStatus(snowmans[0]);
+
+        TargetKeyQueue = new Queue<KeyEnum>();
+        m_UpKeyPool = new Queue<KeyEnum>(Enumerable.Repeat(KeyEnum.Up, 6));
+        m_DownKeyPool = new Queue<KeyEnum>(Enumerable.Repeat(KeyEnum.Down, 6));
+        m_LeftKeyPool = new Queue<KeyEnum>(Enumerable.Repeat(KeyEnum.Left, 6));
+        m_RightKeyPool = new Queue<KeyEnum>(Enumerable.Repeat(KeyEnum.Right, 6));
+        RefillTargetKey();
+    }
+
+    public void RecycleTargetKey()
+    {
+        KeyEnum keyEnum = TargetKeyQueue.Dequeue();
+
+        if (keyEnum == KeyEnum.Up)
+            m_UpKeyPool.Enqueue(keyEnum);
+        else if (keyEnum == KeyEnum.Down)
+            m_DownKeyPool.Enqueue(keyEnum);
+        else if (keyEnum == KeyEnum.Left)
+            m_LeftKeyPool.Enqueue(keyEnum);
+        else if (keyEnum == KeyEnum.Right)
+            m_RightKeyPool.Enqueue(keyEnum);
+
+        RefillTargetKey();
+    }
+
+    void RefillTargetKey()
+    {
+        while (TargetKeyQueue.Count != maxKeyQueueSize)
+        {
+            KeyEnum keyEnum = (KeyEnum)Random.Range(0, 3);
+
+            if (keyEnum == KeyEnum.Up && m_UpKeyPool.Count != 0)
+                TargetKeyQueue.Enqueue(m_UpKeyPool.Dequeue());
+            else if (keyEnum == KeyEnum.Down && m_DownKeyPool.Count != 0)
+                TargetKeyQueue.Enqueue(m_DownKeyPool.Dequeue());
+            else if (keyEnum == KeyEnum.Left && m_LeftKeyPool.Count != 0)
+                TargetKeyQueue.Enqueue(m_LeftKeyPool.Dequeue());
+            else if (keyEnum == KeyEnum.Right && m_RightKeyPool.Count != 0)
+                TargetKeyQueue.Enqueue(m_RightKeyPool.Dequeue());
+        }
     }
 
     // Update is called once per frame
@@ -25,8 +75,7 @@ public class GameManager : MonoBehaviour
 
     void CheckSnowmanRespawn()
     {
-        // if (snowmans[0].hp > 0.2f)
-        if (snowmans[0].qteQueue.Count != 0)
+        if (snowmans[0].hp > 0.2f)
         {
             return;
         }
