@@ -49,6 +49,7 @@ public class Snowman : MonoBehaviour
     {
         // remainingBlockCount--;
         //Debug.Log("Remaining Block Count : " + remainingBlockCount.ToString());
+
         float remainingCountRatio = (float)remainingBlockCount / maxBlockCount;
         if (remainingCountRatio < 0.333f)
         {
@@ -66,21 +67,20 @@ public class Snowman : MonoBehaviour
         int layer = collision.gameObject.layer;
         switch (layer)
         {
-        case 6:
-        {
-            PlayHitParticle(leftHandParticle);
-            break;
-        }
-        case 7:
-        {
-            PlayHitParticle(rightHandParticle);
-
-            break;
-        }
-        default:
-        {
-            break;
-        }
+            case 6:
+                {
+                    PlayHitParticle(leftHandParticle);
+                    break;
+                }
+            case 7:
+                {
+                    PlayHitParticle(rightHandParticle);
+                    break;
+                }
+            default:
+                {
+                    break;
+                }
         }
 
     }

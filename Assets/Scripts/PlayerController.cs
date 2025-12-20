@@ -76,12 +76,14 @@ public class PlayerController : MonoBehaviour
         Transform targetTransform = null;
         if (playerBody == leftArm)
         {
+
             targetTransform = m_LeftArmTransform;
             startLocalPos = m_LeftArmStartLocalPos;
             direction = targetTransform.localRotation * -Vector3.forward;
         }
         else if (playerBody == rightArm)
         {
+
             targetTransform = m_RightArmTransform;
             startLocalPos = m_RightArmStartLocalPos;
             direction = targetTransform.localRotation * -Vector3.forward;
@@ -95,6 +97,7 @@ public class PlayerController : MonoBehaviour
 
         targetTransform.localPosition = startLocalPos;
         m_IsMoving = false;
+
     }
 
     IEnumerator LerpPosition(Transform targetTransform, Vector3 start, Vector3 end, float time)

@@ -212,6 +212,13 @@ public class GameManager : MonoBehaviour
             // 블록 파괴 성공 시
             blockScore++;
             snowmans[0].remainingBlockCount--;
+            
+            // 사운드 재생
+            if (AudioManager.instance != null)
+            {
+                AudioManager.instance.PlayRandomHitSound();
+            }
+            
             // UI 업데이트
             if (UIController.instance != null)
             {
