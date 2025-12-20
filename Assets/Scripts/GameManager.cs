@@ -57,7 +57,7 @@ public class GameManager : MonoBehaviour
         float targetAlpha = 0f;
         globalVolume.profile.TryGet(out Vignette vignette);
         float startIntensity = vignette.intensity.value;
-        float targetIntensity = startIntensity - 0.1f;
+        float targetIntensity = startIntensity - 0.3f;
 
         while (elapsed < fadeDuration)
         {
