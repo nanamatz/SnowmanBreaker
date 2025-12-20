@@ -23,12 +23,7 @@ public class QTEBar : MonoBehaviour
     private float m_MaxBlockXPos = 450.0f;
     [SerializeField] private Block[] m_VisibleBlockLists = new Block[visibleBlockListCount];
     [SerializeField] private int m_CurrentBlockIndex = 0;
-    private int m_RemainingBlockCount = 4;
-    public int RemainingBlockCount
-    {
-        get { return m_RemainingBlockCount; }
-        set { m_RemainingBlockCount = value; }
-    }
+    private Snowman m_Snowman;
 
     private Queue<Block> m_UpBlocks = new Queue<Block>();
     private Queue<Block> m_DownBlocks = new Queue<Block>();
@@ -92,10 +87,13 @@ public class QTEBar : MonoBehaviour
 
             m_VisibleBlockLists[i] = GetRandomBlock();
             m_VisibleBlockLists[i].GetComponent<Image>().rectTransform.anchoredPosition = new Vector2(m_MaxBlockXPos + (100.0f * i), 0.0f);
-            m_VisibleBlockLists[i].gameObject.SetActive(true);
-            if (i >= m_RemainingBlockCount)
+            if (i >= m_Snowman.remainingBlockCount)
             {
                 m_VisibleBlockLists[i].gameObject.SetActive(false);
+            }
+            else
+            {
+                m_VisibleBlockLists[i].gameObject.SetActive(true);
             }
         }
 
@@ -172,6 +170,7 @@ public class QTEBar : MonoBehaviour
 
     void IdleBlock(Block block)
     {
+        block.gameObject.SetActive(false);
         if (block is ReverseBlock)
         {
             // ...
@@ -208,9 +207,9 @@ public class QTEBar : MonoBehaviour
         }
     }
 
-    public void SetRemainingBlockCount(int blockCount)
+    public void SetSnowman(Snowman snowman)
     {
-        m_RemainingBlockCount = blockCount;
+        m_Snowman = snowman;
         InitVisibleBlock();
     }
 
@@ -229,10 +228,9 @@ public class QTEBar : MonoBehaviour
             m_VisibleBlockLists[m_CurrentBlockIndex] = GetRandomBlock();
             m_VisibleBlockLists[m_CurrentBlockIndex].GetComponent<Image>().rectTransform.anchoredPosition = new Vector2(m_MaxBlockXPos, 0.0f);
 
-            if (m_RemainingBlockCount > visibleBlockListCount)
+            if (m_Snowman.remainingBlockCount > visibleBlockListCount)
             {
                 m_VisibleBlockLists[m_CurrentBlockIndex].gameObject.SetActive(true);
-                m_RemainingBlockCount--;
             }
             else
             {
