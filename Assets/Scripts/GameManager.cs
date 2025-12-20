@@ -23,6 +23,9 @@ public class GameManager : MonoBehaviour
     public float duration = 0.5f;
     public QTEBar qteBar;
 
+    public float currentTimer;
+    public int blockScore = 0;
+
     private static GameManager instance;
 
     public static GameManager Instance
@@ -73,7 +76,7 @@ public class GameManager : MonoBehaviour
         {
             instance = this;
 
-            DontDestroyOnLoad(gameObject);
+            // DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -84,18 +87,49 @@ public class GameManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        currentTimer = 60.0f;
         statusOverlay.SetStatus(snowmans[0]);
-        qteBar.RemainingBlockCount = snowmans[0].remainBlockCount;
+        qteBar.SetSnowman(snowmans[0]);
     }
     // Update is called once per frame
     void Update()
     {
+        UpdateTimer();
         CheckSnowmanRespawn();
+    }
+
+    void UpdateTimer()
+    {
+        if (currentTimer > 0)
+        {
+            currentTimer -= Time.deltaTime;
+            if (currentTimer <= 0)
+            {
+                currentTimer = 0;
+                GameOver();
+            }
+        }
+    }
+
+    void GameOver()
+    {
+        // 게임 오버 처리 로직 추가
+        if (UIController.instance != null)
+        {
+            UIController.instance.ShowEndGameCanvas();
+        }
+
+        // PlayerController 비활성화
+        PlayerController playerController = FindFirstObjectByType<PlayerController>();
+        if (playerController != null)
+        {
+            playerController.enabled = false;
+        }
     }
 
     void CheckSnowmanRespawn()
     {
-        if (snowmans[0].remainBlockCount > 0)
+        if (snowmans[0].remainingBlockCount > 0)
         {
             return;
         }
@@ -119,6 +153,15 @@ public class GameManager : MonoBehaviour
         deadSnowman.Respawn(deadSnowman.level + snowmans.Count);
 
         statusOverlay.SetStatus(snowmans[0]);
+        qteBar.SetSnowman(snowmans[0]);
+
+
+        // UI 업데이트
+        if (UIController.instance != null)
+        {
+            UIController.instance.UpdateLevel();
+            UIController.instance.UpdateRemainBlockCount(); // 레벨 변경 시 남은 블록 수도 업데이트
+        }
     }
 
     private System.Collections.IEnumerator SnowmanMoveRoutine(Transform targetTransform, Vector3 offset)
@@ -153,7 +196,31 @@ public class GameManager : MonoBehaviour
     public bool TryHitProcess(KeyEnum keyEnum)
     {
         IBreakable.Status status = qteBar.TryProcess(keyEnum);
+        if (status == IBreakable.Status.Broken)
+        {
+            // 블록 파괴 성공 시
+            blockScore++;
+            snowmans[0].remainingBlockCount--;
+            // UI 업데이트
+            if (UIController.instance != null)
+            {
+                UIController.instance.UpdateRemainBlockCount();
+            }
+        }
+        else
+        {
+            // 잘못된 입력 시 피드백 효과
+            if (UIController.instance != null)
+            {
+                UIController.instance.ShowWrongInputFeedback();
+            }
+        }
 
-        return IBreakable.Status.NotInteracted == status;
+        return !(IBreakable.Status.NotInteracted == status);
+    }
+
+    public void RestartGame()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
     }
 }
