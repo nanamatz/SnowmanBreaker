@@ -1,4 +1,5 @@
 using NUnit.Framework;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -10,7 +11,9 @@ using static UnityEngine.GraphicsBuffer;
 public class GameManager : MonoBehaviour
 {
     public Animator cameraAnimator;
-    public CanvasGroup startUICanvasGroup;
+    public CanvasGroup introCanvasGroup;
+    public CanvasGroup gameCanvasGroup;
+    public CanvasGroup endCanvasGroup;
 
     public List<Snowman> snowmans;
     public StatusOverlay statusOverlay;
@@ -37,27 +40,26 @@ public class GameManager : MonoBehaviour
         StartCoroutine(FadeOutStartUI());
     }
 
-    private System.Collections.IEnumerator FadeOutStartUI()
+    private IEnumerator FadeOutStartUI()
     {
         float fadeDuration = 2.0f;
         float elapsed = 0f;
-        float startAlpha = startUICanvasGroup.alpha;
+        float startAlpha = introCanvasGroup.alpha;
 
         while (elapsed < fadeDuration)
         {
             elapsed += Time.deltaTime;
-            startUICanvasGroup.alpha = Mathf.Lerp(startAlpha, 0f, elapsed / fadeDuration);
+            introCanvasGroup.alpha = Mathf.Lerp(startAlpha, 0f, elapsed / fadeDuration);
             yield return null;
         }
 
-        startUICanvasGroup.alpha = 0f;
-        startUICanvasGroup.interactable = false;
-        startUICanvasGroup.blocksRaycasts = false;
+        introCanvasGroup.alpha = 0f;
+        introCanvasGroup.interactable = false;
+        introCanvasGroup.blocksRaycasts = false;
 
         cameraAnimator.SetTrigger("GameStart");
     }
 
-    public void RecycleTargetKey()
     void Awake()
     {
         if (null == instance)
