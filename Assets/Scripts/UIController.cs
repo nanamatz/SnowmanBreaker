@@ -9,6 +9,7 @@ public class UIController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI m_TimerText;
     [SerializeField] private TextMeshProUGUI m_RemainBlockText;
     [SerializeField] private TextMeshProUGUI m_BlockScoreText;
+    [SerializeField] private TextMeshProUGUI m_CountDownText;
 
     [SerializeField] private GameObject m_EndGameCanvas;
     [SerializeField] private GameObject m_WrongInputHighlight;
@@ -38,9 +39,11 @@ public class UIController : MonoBehaviour
         {
             m_originalTimerColor = m_TimerText.color;
         }
-        UpdateTimer();
         UpdateLevel();
         UpdateRemainBlockCount();
+
+        // 게임 시작 시 카운트다운 시작
+        StartCountdown();
     }
 
     void Update()
@@ -55,7 +58,8 @@ public class UIController : MonoBehaviour
             float currentTime = GameManager.Instance.currentTimer;
             int seconds = Mathf.FloorToInt(currentTime);
             int milliseconds = Mathf.FloorToInt((currentTime - seconds) * 100);
-            m_TimerText.text = string.Format("{0:00}:{1:00}", seconds, milliseconds);
+
+            m_TimerText.text = string.Format("{0:00} : {1:00}", seconds, milliseconds);
 
             // 5초 이하일 때 긴박감 연출
             if (currentTime <= 5f && currentTime > 0)
@@ -77,6 +81,11 @@ public class UIController : MonoBehaviour
                 }
             }
         }
+    }
+
+    void StartCountdown()
+    {
+        StartCoroutine(CountdownRoutine());
     }
 
     public void UpdateRemainBlockCount()
@@ -153,21 +162,43 @@ public class UIController : MonoBehaviour
         }
     }
 
+    IEnumerator CountdownRoutine()
+    {
+        float count = 3f;
+
+        while (count > 0)
+        {
+            m_CountDownText.text = Mathf.Ceil(count).ToString();
+            count -= Time.unscaledDeltaTime; // TimeScale 영향을 받지 않도록!
+
+
+            yield return null;
+        }
+
+        m_CountDownText.text = "GO!";
+        yield return new WaitForSecondsRealtime(1f);
+
+        m_CountDownText.gameObject.SetActive(false);
+
+        GameManager.Instance.ResumeGame();
+
+    }
+
     IEnumerator WrongInputHighlightEffect()
     {
         if (m_WrongInputHighlight == null) yield break;
 
         m_WrongInputHighlight.SetActive(true);
-        
+
         float duration = 1.0f;
         float elapsed = 0f;
         Vector3 originalScale = m_WrongInputHighlight.transform.localScale;
-        
+
         // 반짝반짝 + 크기 변화 효과
         while (elapsed < duration)
         {
             float progress = elapsed / duration;
-            
+
             // 반짝반짝 효과 (알파 값 변화)
             CanvasGroup canvasGroup = m_WrongInputHighlight.GetComponent<CanvasGroup>();
             if (canvasGroup != null)
@@ -175,15 +206,16 @@ public class UIController : MonoBehaviour
                 float alpha = Mathf.PingPong(Time.time * 8f, 1f); // 빠른 깜빡임
                 canvasGroup.alpha = alpha;
             }
-            
+
             // 크기 변화 효과 (펄스)
             float scale = 1f + Mathf.Sin(Time.time * 10f) * 0.2f; // 펄스 효과
             m_WrongInputHighlight.transform.localScale = originalScale * scale;
-            
+
+
             elapsed += Time.deltaTime;
             yield return null;
         }
-        
+
         // 원래 상태로 복구 후 비활성화
         m_WrongInputHighlight.transform.localScale = originalScale;
         CanvasGroup finalCanvasGroup = m_WrongInputHighlight.GetComponent<CanvasGroup>();

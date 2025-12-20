@@ -26,9 +26,11 @@ public class GameManager : MonoBehaviour
 
     public float currentTimer;
     public int blockScore = 0;
+    public bool isPaused;
 
     private static GameManager instance;
     [SerializeField] public int reverseBlockMinLevel = 4; // reverse block이 등장하는 최소 레벨
+
 
     public static GameManager Instance
     {
@@ -94,14 +96,13 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        // currentTimer = 60.0f;
-        // statusOverlay.SetStatus(snowmans[0]);
-        // qteBar.SetSnowman(snowmans[0]);
+
     }
 
     // Update is called once per frame
@@ -113,6 +114,10 @@ public class GameManager : MonoBehaviour
 
     void UpdateTimer()
     {
+        if (isPaused)
+        {
+            return;
+        }
         if (currentTimer > 0)
         {
             currentTimer -= Time.deltaTime;
@@ -186,13 +191,13 @@ public class GameManager : MonoBehaviour
         {
             float t = elapsed / duration;
 
-             t = t * t * (3f - 2f * t); 
+            t = t * t * (3f - 2f * t);
 
             targetTransform.localPosition = Vector3.Lerp(startPos, endPos, t);
 
             elapsed += Time.deltaTime;
 
-            yield return null; 
+            yield return null;
         }
 
         targetTransform.localPosition = endPos;
@@ -232,5 +237,17 @@ public class GameManager : MonoBehaviour
     public void RestartGame()
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
+    }
+
+    public void PauseGame()
+    {
+        isPaused = true;
+        Time.timeScale = 0f;
+    }
+
+    public void ResumeGame()
+    {
+        isPaused = false;
+        Time.timeScale = 1f;
     }
 }
