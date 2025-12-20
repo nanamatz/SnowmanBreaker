@@ -119,6 +119,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &16348521 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8456755711452375312, guid: 7fef70b3cd94f744180e9f3d760ea9b2, type: 3}
+  m_PrefabInstance: {fileID: 9168039131143006050}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &54714096
 GameObject:
   m_ObjectHideFlags: 0
@@ -289,7 +294,6 @@ MonoBehaviour:
   moveDistance: 3
   moveSpeed: 0.05
   lastPressedKey: 0
-  gameManager: {fileID: 0}
 --- !u!1 &257145458
 GameObject:
   m_ObjectHideFlags: 0
@@ -908,7 +912,9 @@ MonoBehaviour:
   downBlock: {fileID: 5532181456517848934, guid: 4a87fdfbb0bf6c14fae37443f554cb14, type: 3}
   leftBlock: {fileID: 6466618450349032769, guid: 8f2b15bf7dcc4e542bbed6023db33d1f, type: 3}
   rightBlock: {fileID: 2265094356788330770, guid: c67450a00175e184dbe0e68b25259e78, type: 3}
-  defaultDuration: 0.25
+  defaultDuration: 0.05
+  m_VisibleBlockLists: []
+  m_CurrentBlockIndex: 0
 --- !u!1001 &525833620
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2101,6 +2107,14 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1868127753930668727, guid: 99b7bbbea66ec4d4592db084e674fcba, type: 3}
+      propertyPath: m_Name
+      value: Retry Button
+      objectReference: {fileID: 0}
+    - target: {fileID: 2425580866395358915, guid: 99b7bbbea66ec4d4592db084e674fcba, type: 3}
+      propertyPath: m_Name
+      value: Go To Title Button
+      objectReference: {fileID: 0}
     - target: {fileID: 2495959019398931670, guid: 99b7bbbea66ec4d4592db084e674fcba, type: 3}
       propertyPath: m_fontColor.b
       value: 1
@@ -2204,6 +2218,34 @@ PrefabInstance:
 
 
         Snowmans!'
+      objectReference: {fileID: 0}
+    - target: {fileID: 8343217557675429511, guid: 99b7bbbea66ec4d4592db084e674fcba, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8343217557675429511, guid: 99b7bbbea66ec4d4592db084e674fcba, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8343217557675429511, guid: 99b7bbbea66ec4d4592db084e674fcba, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1960496932}
+    - target: {fileID: 8343217557675429511, guid: 99b7bbbea66ec4d4592db084e674fcba, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8343217557675429511, guid: 99b7bbbea66ec4d4592db084e674fcba, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnRestartButtonClicked
+      objectReference: {fileID: 0}
+    - target: {fileID: 8343217557675429511, guid: 99b7bbbea66ec4d4592db084e674fcba, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: UIController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8343217557675429511, guid: 99b7bbbea66ec4d4592db084e674fcba, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2482,6 +2524,7 @@ MonoBehaviour:
   m_remainBlockText: {fileID: 9168039131143006051}
   m_blockScoreText: {fileID: 1095392400}
   m_endGameCanvas: {fileID: 66190464}
+  m_wrongInputHighlight: {fileID: 16348521}
 --- !u!4 &1960496933
 Transform:
   m_ObjectHideFlags: 0
@@ -2834,6 +2877,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1026110448}
     m_Modifications:
+    - target: {fileID: 1929250921789902897, guid: 7fef70b3cd94f744180e9f3d760ea9b2, type: 3}
+      propertyPath: m_Color.b
+      value: 0.008803844
+      objectReference: {fileID: 0}
+    - target: {fileID: 1929250921789902897, guid: 7fef70b3cd94f744180e9f3d760ea9b2, type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1929250921789902897, guid: 7fef70b3cd94f744180e9f3d760ea9b2, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1929250921789902897, guid: 7fef70b3cd94f744180e9f3d760ea9b2, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 2100000, guid: d22496696b1e9d040a563e46b9bdc8af, type: 2}
     - target: {fileID: 2444727465781438571, guid: 7fef70b3cd94f744180e9f3d760ea9b2, type: 3}
       propertyPath: m_Name
       value: QTEBackground
@@ -2919,7 +2978,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 4842588098750309911, guid: 7fef70b3cd94f744180e9f3d760ea9b2, type: 3}
+    - {fileID: 4449052543721881541, guid: 7fef70b3cd94f744180e9f3d760ea9b2, type: 3}
+    - {fileID: 2476560921424282361, guid: 7fef70b3cd94f744180e9f3d760ea9b2, type: 3}
+    - {fileID: 2484400965785631173, guid: 7fef70b3cd94f744180e9f3d760ea9b2, type: 3}
+    - {fileID: 4393513148463101470, guid: 7fef70b3cd94f744180e9f3d760ea9b2, type: 3}
+    - {fileID: 6984817507057033230, guid: 7fef70b3cd94f744180e9f3d760ea9b2, type: 3}
+    - {fileID: 3924183517863083007, guid: 7fef70b3cd94f744180e9f3d760ea9b2, type: 3}
+    - {fileID: 7145426719209380657, guid: 7fef70b3cd94f744180e9f3d760ea9b2, type: 3}
+    - {fileID: 48772019850863731, guid: 7fef70b3cd94f744180e9f3d760ea9b2, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 8262342012742532546, guid: 7fef70b3cd94f744180e9f3d760ea9b2, type: 3}

@@ -38,7 +38,7 @@ public class GameManager : MonoBehaviour
         {
             instance = this;
 
-            DontDestroyOnLoad(gameObject);
+            // DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -169,7 +169,20 @@ public class GameManager : MonoBehaviour
                 UIController.instance.UpdateRemainBlockCount();
             }
         }
+        else
+        {
+            // 잘못된 입력 시 피드백 효과
+            if (UIController.instance != null)
+            {
+                UIController.instance.ShowWrongInputFeedback();
+            }
+        }
 
         return !(IBreakable.Status.NotInteracted == status);
+    }
+
+    public void RestartGame()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
     }
 }
