@@ -162,8 +162,7 @@ public class GameManager : MonoBehaviour
         {
             // 블록 파괴 성공 시
             blockScore++;
-            snowmans[0].remainingBlockCount--; // 현재 스노우맨의 블록 수 감소
-
+            snowmans[0].remainingBlockCount--;
             // UI 업데이트
             if (UIController.instance != null)
             {

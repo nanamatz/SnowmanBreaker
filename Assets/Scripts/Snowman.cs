@@ -14,10 +14,6 @@ public class Snowman : MonoBehaviour
     public int level = 1;
     public int maxBlockCount = 0;
     public int remainingBlockCount = 0;
-<<<<<<< HEAD
-=======
-
->>>>>>> feat/IngameUI
 
     void Awake()
     {
@@ -28,12 +24,8 @@ public class Snowman : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-<<<<<<< HEAD
-
-=======
         maxBlockCount = GetMaxBlockCount(level);
         remainingBlockCount = maxBlockCount;
->>>>>>> feat/IngameUI
     }
 
     // Update is called once per frame
@@ -54,14 +46,11 @@ public class Snowman : MonoBehaviour
 
     public void OnHit(Collider collision)
     {
-<<<<<<< HEAD
-        remainingBlockCount--;
+        // remainingBlockCount--;
         Debug.Log("Remaining Block Count : " + remainingBlockCount.ToString());
         float newScaleY = (float)remainingBlockCount / maxBlockCount;
         body.transform.localScale = new Vector3(5.0f, 5.0f * Mathf.Max(0.0f, Mathf.Min(1.0f, newScaleY)), 5.0f);
-=======
-        body.transform.localScale = new Vector3(5.0f, 5.0f * Mathf.Max(0.0f, Mathf.Min(1.0f, remainingBlockCount / (float)(level * 4)), 5.0f));
->>>>>>> feat/IngameUI
+
         int layer = collision.gameObject.layer;
         switch (layer)
         {
