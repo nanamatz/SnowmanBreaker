@@ -49,7 +49,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1086341247508780667, guid: 85fc39232c785494db7f31340025867c, type: 3}
       propertyPath: m_Name
-      value: Snowman1 (1)
+      value: Chaser
       objectReference: {fileID: 0}
     - target: {fileID: 8574250191627384050, guid: 85fc39232c785494db7f31340025867c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -94,10 +94,35 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 5305518042767052532, guid: 85fc39232c785494db7f31340025867c, type: 3}
     - {fileID: 7257860198479786417, guid: 85fc39232c785494db7f31340025867c, type: 3}
+    - {fileID: 7164514714423989364, guid: 85fc39232c785494db7f31340025867c, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1086341247508780667, guid: 85fc39232c785494db7f31340025867c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8501782078915128508}
   m_SourcePrefab: {fileID: 100100000, guid: 85fc39232c785494db7f31340025867c, type: 3}
+--- !u!1 &619163244618894725 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1086341247508780667, guid: 85fc39232c785494db7f31340025867c, type: 3}
+  m_PrefabInstance: {fileID: 541769146776509438}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8501782078915128508
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 619163244618894725}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be428b1e599c067498120a32c93d7efd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Chaser
+  player: {fileID: 0}
+  maxChaseDistance: 10
+  chaseDistance: 10
+  duration: 0.5
 --- !u!4 &8176596516415680268 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8574250191627384050, guid: 85fc39232c785494db7f31340025867c, type: 3}
@@ -113,7 +138,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 836754848130815374, guid: 952a2d515a7ee854a8d69eb9d1b18047, type: 3}
       propertyPath: m_Name
-      value: Snowman_Level (3)
+      value: Chaser
       objectReference: {fileID: 0}
     - target: {fileID: 3944978812914553525, guid: 952a2d515a7ee854a8d69eb9d1b18047, type: 3}
       propertyPath: m_LocalScale.x
@@ -170,10 +195,35 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 871329577382622647, guid: 952a2d515a7ee854a8d69eb9d1b18047, type: 3}
     - {fileID: 5003745401106124734, guid: 952a2d515a7ee854a8d69eb9d1b18047, type: 3}
+    - {fileID: 6577296572189195937, guid: 952a2d515a7ee854a8d69eb9d1b18047, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 836754848130815374, guid: 952a2d515a7ee854a8d69eb9d1b18047, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6646869198562732913}
   m_SourcePrefab: {fileID: 100100000, guid: 952a2d515a7ee854a8d69eb9d1b18047, type: 3}
+--- !u!1 &1435574152718961755 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 836754848130815374, guid: 952a2d515a7ee854a8d69eb9d1b18047, type: 3}
+  m_PrefabInstance: {fileID: 1761170289714502101}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6646869198562732913
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1435574152718961755}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be428b1e599c067498120a32c93d7efd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Chaser
+  player: {fileID: 0}
+  maxChaseDistance: 10
+  chaseDistance: 10
+  duration: 0.5
 --- !u!4 &3373071154889706336 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3944978812914553525, guid: 952a2d515a7ee854a8d69eb9d1b18047, type: 3}
@@ -241,7 +291,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4744217432826020287, guid: 5b7f9a4e418a810459592f1bdf31704e, type: 3}
       propertyPath: m_Name
-      value: Snowman_Level (2)
+      value: Chaser
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2664966207303676924, guid: 5b7f9a4e418a810459592f1bdf31704e, type: 3}
@@ -249,13 +299,37 @@ PrefabInstance:
     - {fileID: 5994058911424765630, guid: 5b7f9a4e418a810459592f1bdf31704e, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4744217432826020287, guid: 5b7f9a4e418a810459592f1bdf31704e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5177276804357422654}
   m_SourcePrefab: {fileID: 100100000, guid: 5b7f9a4e418a810459592f1bdf31704e, type: 3}
 --- !u!4 &591051704851109277 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3211015451368680560, guid: 5b7f9a4e418a810459592f1bdf31704e, type: 3}
   m_PrefabInstance: {fileID: 2646999402129193453}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &7307899017631594578 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4744217432826020287, guid: 5b7f9a4e418a810459592f1bdf31704e, type: 3}
+  m_PrefabInstance: {fileID: 2646999402129193453}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5177276804357422654
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7307899017631594578}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be428b1e599c067498120a32c93d7efd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Chaser
+  player: {fileID: 0}
+  maxChaseDistance: 10
+  chaseDistance: 10
+  duration: 0.5
 --- !u!1001 &3442029842431870715
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -318,7 +392,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4744217432826020287, guid: 5b7f9a4e418a810459592f1bdf31704e, type: 3}
       propertyPath: m_Name
-      value: Snowman_Level
+      value: Chaser
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2664966207303676924, guid: 5b7f9a4e418a810459592f1bdf31704e, type: 3}
@@ -326,13 +400,37 @@ PrefabInstance:
     - {fileID: 5994058911424765630, guid: 5b7f9a4e418a810459592f1bdf31704e, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4744217432826020287, guid: 5b7f9a4e418a810459592f1bdf31704e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1074119114582340011}
   m_SourcePrefab: {fileID: 100100000, guid: 5b7f9a4e418a810459592f1bdf31704e, type: 3}
 --- !u!4 &237382833380584075 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3211015451368680560, guid: 5b7f9a4e418a810459592f1bdf31704e, type: 3}
   m_PrefabInstance: {fileID: 3442029842431870715}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &7931493673793849156 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4744217432826020287, guid: 5b7f9a4e418a810459592f1bdf31704e, type: 3}
+  m_PrefabInstance: {fileID: 3442029842431870715}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1074119114582340011
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7931493673793849156}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be428b1e599c067498120a32c93d7efd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Chaser
+  player: {fileID: 0}
+  maxChaseDistance: 10
+  chaseDistance: 10
+  duration: 0.5
 --- !u!1001 &3977942731918088830
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -343,7 +441,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 836754848130815374, guid: 952a2d515a7ee854a8d69eb9d1b18047, type: 3}
       propertyPath: m_Name
-      value: Snowman_Level (1)
+      value: Chaser
       objectReference: {fileID: 0}
     - target: {fileID: 3944978812914553525, guid: 952a2d515a7ee854a8d69eb9d1b18047, type: 3}
       propertyPath: m_LocalScale.y
@@ -392,15 +490,40 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 871329577382622647, guid: 952a2d515a7ee854a8d69eb9d1b18047, type: 3}
     - {fileID: 5003745401106124734, guid: 952a2d515a7ee854a8d69eb9d1b18047, type: 3}
+    - {fileID: 6577296572189195937, guid: 952a2d515a7ee854a8d69eb9d1b18047, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 836754848130815374, guid: 952a2d515a7ee854a8d69eb9d1b18047, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8083692664301270322}
   m_SourcePrefab: {fileID: 100100000, guid: 952a2d515a7ee854a8d69eb9d1b18047, type: 3}
 --- !u!4 &111213962735241419 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3944978812914553525, guid: 952a2d515a7ee854a8d69eb9d1b18047, type: 3}
   m_PrefabInstance: {fileID: 3977942731918088830}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &4370952136968589296 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 836754848130815374, guid: 952a2d515a7ee854a8d69eb9d1b18047, type: 3}
+  m_PrefabInstance: {fileID: 3977942731918088830}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8083692664301270322
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4370952136968589296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be428b1e599c067498120a32c93d7efd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Chaser
+  player: {fileID: 0}
+  maxChaseDistance: 10
+  chaseDistance: 10
+  duration: 0.5
 --- !u!1001 &7144586542291774851
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -411,7 +534,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1086341247508780667, guid: 85fc39232c785494db7f31340025867c, type: 3}
       propertyPath: m_Name
-      value: Snowman1 (3)
+      value: Chaser
       objectReference: {fileID: 0}
     - target: {fileID: 8574250191627384050, guid: 85fc39232c785494db7f31340025867c, type: 3}
       propertyPath: m_LocalScale.x
@@ -468,15 +591,40 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 5305518042767052532, guid: 85fc39232c785494db7f31340025867c, type: 3}
     - {fileID: 7257860198479786417, guid: 85fc39232c785494db7f31340025867c, type: 3}
+    - {fileID: 7164514714423989364, guid: 85fc39232c785494db7f31340025867c, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1086341247508780667, guid: 85fc39232c785494db7f31340025867c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3449650589657330468}
   m_SourcePrefab: {fileID: 100100000, guid: 85fc39232c785494db7f31340025867c, type: 3}
 --- !u!4 &1574976214434584945 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8574250191627384050, guid: 85fc39232c785494db7f31340025867c, type: 3}
   m_PrefabInstance: {fileID: 7144586542291774851}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &7797382424308743160 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1086341247508780667, guid: 85fc39232c785494db7f31340025867c, type: 3}
+  m_PrefabInstance: {fileID: 7144586542291774851}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3449650589657330468
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7797382424308743160}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be428b1e599c067498120a32c93d7efd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Chaser
+  player: {fileID: 0}
+  maxChaseDistance: 10
+  chaseDistance: 10
+  duration: 0.5
 --- !u!1001 &7634297609517130065
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -487,7 +635,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1086341247508780667, guid: 85fc39232c785494db7f31340025867c, type: 3}
       propertyPath: m_Name
-      value: Snowman1 (2)
+      value: Chaser
       objectReference: {fileID: 0}
     - target: {fileID: 8574250191627384050, guid: 85fc39232c785494db7f31340025867c, type: 3}
       propertyPath: m_LocalScale.x
@@ -544,15 +692,40 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 5305518042767052532, guid: 85fc39232c785494db7f31340025867c, type: 3}
     - {fileID: 7257860198479786417, guid: 85fc39232c785494db7f31340025867c, type: 3}
+    - {fileID: 7164514714423989364, guid: 85fc39232c785494db7f31340025867c, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1086341247508780667, guid: 85fc39232c785494db7f31340025867c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4465681866080318384}
   m_SourcePrefab: {fileID: 100100000, guid: 85fc39232c785494db7f31340025867c, type: 3}
 --- !u!4 &2238185818343052707 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8574250191627384050, guid: 85fc39232c785494db7f31340025867c, type: 3}
   m_PrefabInstance: {fileID: 7634297609517130065}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &7413220350050989866 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1086341247508780667, guid: 85fc39232c785494db7f31340025867c, type: 3}
+  m_PrefabInstance: {fileID: 7634297609517130065}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4465681866080318384
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7413220350050989866}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be428b1e599c067498120a32c93d7efd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Chaser
+  player: {fileID: 0}
+  maxChaseDistance: 10
+  chaseDistance: 10
+  duration: 0.5
 --- !u!1001 &9222641172817537503
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -563,7 +736,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 836754848130815374, guid: 952a2d515a7ee854a8d69eb9d1b18047, type: 3}
       propertyPath: m_Name
-      value: Snowman_Level
+      value: Chaser
       objectReference: {fileID: 0}
     - target: {fileID: 3944978812914553525, guid: 952a2d515a7ee854a8d69eb9d1b18047, type: 3}
       propertyPath: m_LocalScale.y
@@ -571,15 +744,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3944978812914553525, guid: 952a2d515a7ee854a8d69eb9d1b18047, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -13.88
+      value: -14.22
       objectReference: {fileID: 0}
     - target: {fileID: 3944978812914553525, guid: 952a2d515a7ee854a8d69eb9d1b18047, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -7.48
+      value: -11.59
       objectReference: {fileID: 0}
     - target: {fileID: 3944978812914553525, guid: 952a2d515a7ee854a8d69eb9d1b18047, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -6.0911493
+      value: -3.37
       objectReference: {fileID: 0}
     - target: {fileID: 3944978812914553525, guid: 952a2d515a7ee854a8d69eb9d1b18047, type: 3}
       propertyPath: m_LocalRotation.w
@@ -612,12 +785,37 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 871329577382622647, guid: 952a2d515a7ee854a8d69eb9d1b18047, type: 3}
     - {fileID: 5003745401106124734, guid: 952a2d515a7ee854a8d69eb9d1b18047, type: 3}
+    - {fileID: 6577296572189195937, guid: 952a2d515a7ee854a8d69eb9d1b18047, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 836754848130815374, guid: 952a2d515a7ee854a8d69eb9d1b18047, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4881742784027682260}
   m_SourcePrefab: {fileID: 100100000, guid: 952a2d515a7ee854a8d69eb9d1b18047, type: 3}
 --- !u!4 &5278788431677799274 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3944978812914553525, guid: 952a2d515a7ee854a8d69eb9d1b18047, type: 3}
   m_PrefabInstance: {fileID: 9222641172817537503}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &8386167950331231313 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 836754848130815374, guid: 952a2d515a7ee854a8d69eb9d1b18047, type: 3}
+  m_PrefabInstance: {fileID: 9222641172817537503}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4881742784027682260
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8386167950331231313}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be428b1e599c067498120a32c93d7efd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Chaser
+  player: {fileID: 0}
+  maxChaseDistance: 10
+  chaseDistance: 10
+  duration: 0.5

@@ -240,6 +240,11 @@ public class GameManager : MonoBehaviour
             {
                 UIController.instance.ShowWrongInputFeedback();
                 mainCameraShaker.ShakeCamera();
+                Chaser[] chasers = Object.FindObjectsByType<Chaser>(FindObjectsSortMode.None);
+                foreach(Chaser chaser in chasers)
+                {
+                    chaser.Chase();
+                }
             }
         }
 
