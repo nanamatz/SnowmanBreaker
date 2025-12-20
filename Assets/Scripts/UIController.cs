@@ -151,5 +151,4 @@ public class UIController : MonoBehaviour
             m_BlockAlert.Alert();
         }
     }
-
 }

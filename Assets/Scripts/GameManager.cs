@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour
 
     public float currentTimer;
     public int blockScore = 0;
+    public bool isGameStarted = false;
 
     private static GameManager instance;
     [SerializeField] public int reverseBlockMinLevel = 4; // reverse block이 등장하는 최소 레벨
@@ -46,6 +47,7 @@ public class GameManager : MonoBehaviour
     {
         AudioManager.instance.PlayBackgroundMusic();
         StartCoroutine(FadeOutStartUI());
+        isGameStarted = true;
     }
 
     private IEnumerator FadeOutStartUI()
@@ -56,7 +58,7 @@ public class GameManager : MonoBehaviour
         float targetAlpha = 0f;
         globalVolume.profile.TryGet(out Vignette vignette);
         float startIntensity = vignette.intensity.value;
-        float targetIntensity = startIntensity - 0.1f;
+        float targetIntensity = startIntensity - 0.3f;
 
         while (elapsed < fadeDuration)
         {
@@ -110,6 +112,19 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (false == isGameStarted)
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                GameStart();
+            }
+        }
+
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
+
         UpdateTimer();
         CheckSnowmanRespawn();
     }
@@ -232,7 +247,7 @@ public class GameManager : MonoBehaviour
             if (UIController.instance != null)
             {
                 UIController.instance.ShowWrongInputFeedback();
-                //mainCameraShaker.ShakeCamera();
+                mainCameraShaker.ShakeCamera();
             }
         }
 
