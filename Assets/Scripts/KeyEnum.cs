@@ -3,6 +3,10 @@ public enum KeyEnum
 {
     Up,
     Right,
-    Left,
     Down,
+    Left,
+    
+    
+    
+    Count, 
 }
