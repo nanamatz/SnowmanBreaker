@@ -1,26 +1,75 @@
 using NUnit.Framework;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Threading;
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager instance;
     public List<Snowman> snowmans;
     public StatusOverlay statusOverlay;
     public float moveDistance = 20.0f;
     public float duration = 0.5f;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    public float timer = 10.0f;
+    public float currentTimer;
+
+    void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    // Start is called once before the first 
+    // execution of Update after the MonoBehaviour is created
     void Start()
     {
         statusOverlay.SetStatus(snowmans[0]);
+        currentTimer = timer;
     }
 
     // Update is called once per frame
     void Update()
     {
+        UpdateTimer();
         CheckSnowmanRespawn();
+    }
+
+    void UpdateTimer()
+    {
+        if (currentTimer > 0)
+        {
+            currentTimer -= Time.deltaTime;
+            if (currentTimer <= 0)
+            {
+                currentTimer = 0;
+                GameOver();
+            }
+        }
+    }
+
+    void GameOver()
+    {
+        // ê²Œì„ ì˜¤ë²„ ì²˜ë¦¬ ë¡œì§ ì¶”ê°€
+        if (UIController.instance != null)
+        {
+            UIController.instance.ShowEndGameCanvas();
+        }
+        
+        // PlayerController ë¹„í™œì„±í™”
+        PlayerController playerController = FindFirstObjectByType<PlayerController>();
+        if (playerController != null)
+        {
+            playerController.enabled = false;
+        }
     }
 
     void CheckSnowmanRespawn()
@@ -34,7 +83,7 @@ public class GameManager : MonoBehaviour
         {
             if (obj != null)
             {
-                // °¢ ¿ÀºêÁ§Æ®º°·Î µ¶¸³ÀûÀÎ ÄÚ·çÆ¾ ½ÇÇà
+                // ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ú·ï¿½Æ¾ ï¿½ï¿½ï¿½ï¿½
                 StartCoroutine(SmoothMoveRoutine(obj.transform, Vector3.left * moveDistance));
             }
         }
@@ -50,6 +99,12 @@ public class GameManager : MonoBehaviour
         deadSnowman.Respawn(deadSnowman.level + snowmans.Count);
 
         statusOverlay.SetStatus(snowmans[0]);
+        
+        // UI ì—…ë°ì´íŠ¸
+        if (UIController.instance != null)
+        {
+            UIController.instance.UpdateLevel();
+        }
     }
 
     private System.Collections.IEnumerator SmoothMoveRoutine(Transform targetTransform, Vector3 offset)
@@ -60,20 +115,20 @@ public class GameManager : MonoBehaviour
 
         while (elapsed < duration)
         {
-            // ½Ã°£ Èå¸§¿¡ µû¸¥ ºñÀ² °è»ê (0 ~ 1)
+            // ï¿½Ã°ï¿½ ï¿½å¸§ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ (0 ~ 1)
             float t = elapsed / duration;
 
-            // ºÎµå·¯¿î °¡¼Ó/°¨¼Ó È¿°ú¸¦ ¿øÇÒ °æ¿ì (¼±ÅÃ »çÇ×)
+            // ï¿½Îµå·¯ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½/ï¿½ï¿½ï¿½ï¿½ È¿ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ (ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½)
             // t = t * t * (3f - 2f * t); 
 
             targetTransform.localPosition = Vector3.Lerp(startPos, endPos, t);
 
             elapsed += Time.deltaTime;
             
-            yield return null; // ´ÙÀ½ ÇÁ·¹ÀÓ±îÁö ´ë±â
+            yield return null; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ó±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
         }
 
-        // ÃÖÁ¾ À§Ä¡ º¸Á¤
+        // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ ï¿½ï¿½ï¿½ï¿½
         targetTransform.localPosition = endPos;
         if(endPos.x < -10.0f)
         {
