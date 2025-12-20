@@ -12,7 +12,7 @@ public class Snowman : MonoBehaviour
 
     public int level = 1;
     public int maxBlockCount = 0;
-    public int remainBlockCount = 0;
+    public int remainingBlockCount = 0;
 
 
 
@@ -20,7 +20,7 @@ public class Snowman : MonoBehaviour
     void Start()
     {
         maxBlockCount = GetMaxBlockCount(level);
-        remainBlockCount = maxBlockCount;
+        remainingBlockCount = maxBlockCount;
     }
 
     // Update is called once per frame
@@ -41,30 +41,30 @@ public class Snowman : MonoBehaviour
 
     public void OnHit(Collider collision)
     {
-        body.transform.localScale = new Vector3(5.0f, 5.0f * Mathf.Max(0.0f, Mathf.Min(1.0f, remainBlockCount / (float)(level * 4)), 5.0f));
+        body.transform.localScale = new Vector3(5.0f, 5.0f * Mathf.Max(0.0f, Mathf.Min(1.0f, remainingBlockCount / (float)(level * 4)), 5.0f));
         int layer = collision.gameObject.layer;
         switch (layer)
         {
-        case 6:
-        {
-            PlayHitParticle(leftHandParticle);
-            break;
-        }
-        case 7:
-        {
-            PlayHitParticle(rightHandParticle);
+            case 6:
+                {
+                    PlayHitParticle(leftHandParticle);
+                    break;
+                }
+            case 7:
+                {
+                    PlayHitParticle(rightHandParticle);
 
-            break;
-        }
-        case 8:
-        {
-            PlayHitParticle(leftFootParticle);
-            break;
-        }
-        default:
-        {
-            break;
-        }
+                    break;
+                }
+            case 8:
+                {
+                    PlayHitParticle(leftFootParticle);
+                    break;
+                }
+            default:
+                {
+                    break;
+                }
         }
 
     }
@@ -84,7 +84,7 @@ public class Snowman : MonoBehaviour
     {
         level = respawnLevel;
         maxBlockCount = GetMaxBlockCount(respawnLevel);
-        remainBlockCount = maxBlockCount;
+        remainingBlockCount = maxBlockCount;
         body.transform.localScale = new Vector3(5.0f, 5.0f, 5.0f);
 
     }

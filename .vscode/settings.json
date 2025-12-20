@@ -75,5 +75,5 @@
         "*.sln": "*.csproj",
         "*.slnx": "*.csproj"
     },
-    "dotnet.defaultSolution": "SnowmanBreaker.slnx"
+    "dotnet.defaultSolution": "SnowmanBreaker2.slnx"
 }

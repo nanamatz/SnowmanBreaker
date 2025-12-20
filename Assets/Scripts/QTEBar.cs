@@ -190,6 +190,8 @@ public class QTEBar : MonoBehaviour
             m_VisibleBlockLists[m_CurrentBlockIndex] = GetRandomBlock();
             m_VisibleBlockLists[m_CurrentBlockIndex].GetComponent<Image>().rectTransform.anchoredPosition = new Vector2(m_MaxBlockXPos, 0.0f);
             m_CurrentBlockIndex = (m_CurrentBlockIndex + 1) % visibleListCount;
+
+            
         }
 
         return processedStatus;
