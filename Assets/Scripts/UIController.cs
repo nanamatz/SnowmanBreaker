@@ -49,7 +49,6 @@ public class UIController : MonoBehaviour
         if (m_timerText != null && GameManager.Instance != null)
         {
             float currentTime = GameManager.Instance.currentTimer;
-            Debug.Log("Current Time: " + currentTime);
             int seconds = Mathf.FloorToInt(currentTime);
             int milliseconds = Mathf.FloorToInt((currentTime - seconds) * 100);
             m_timerText.text = string.Format("{0:00}:{1:00}", seconds, milliseconds);
