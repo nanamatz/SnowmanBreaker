@@ -5,11 +5,13 @@ using System.Linq;
 using System.Reflection;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 using static UnityEngine.GraphicsBuffer;
 
 public class GameManager : MonoBehaviour
 {
+    public Volume globalVolume;
     public Animator cameraAnimator;
     public CanvasGroup introCanvasGroup;
     public CanvasGroup gameCanvasGroup;
@@ -45,11 +47,16 @@ public class GameManager : MonoBehaviour
         float fadeDuration = 2.0f;
         float elapsed = 0f;
         float startAlpha = introCanvasGroup.alpha;
+        float targetAlpha = 0f;
+        globalVolume.profile.TryGet(out Vignette vignette);
+        float startIntensity = vignette.intensity.value;
+        float targetIntensity = startIntensity - 0.1f;
 
         while (elapsed < fadeDuration)
         {
             elapsed += Time.deltaTime;
-            introCanvasGroup.alpha = Mathf.Lerp(startAlpha, 0f, elapsed / fadeDuration);
+            introCanvasGroup.alpha = Mathf.Lerp(startAlpha, targetAlpha, elapsed / fadeDuration);
+            vignette.intensity.value = Mathf.Lerp(startIntensity, targetIntensity, elapsed / fadeDuration);
             yield return null;
         }
 
