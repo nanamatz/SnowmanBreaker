@@ -46,7 +46,7 @@ public class Snowman : MonoBehaviour
 
     public void OnHit(Collider collision)
     {
-        remainingBlockCount--;
+        // remainingBlockCount--;
         Debug.Log("Remaining Block Count : " + remainingBlockCount.ToString());
         float newScaleY = (float)remainingBlockCount / maxBlockCount;
         body.transform.localScale = new Vector3(5.0f, 5.0f * Mathf.Max(0.0f, Mathf.Min(1.0f, newScaleY)), 5.0f);
