@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
     public int blockScore = 0;
 
     private static GameManager instance;
+    [SerializeField] public int reverseBlockMinLevel = 4; // reverse block이 등장하는 최소 레벨
 
     public static GameManager Instance
     {
