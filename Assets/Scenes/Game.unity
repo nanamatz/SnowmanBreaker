@@ -2342,6 +2342,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 1026110448}
     m_Modifications:
     - target: {fileID: 1929250921789902897, guid: 7fef70b3cd94f744180e9f3d760ea9b2, type: 3}
+      propertyPath: m_Color.a
+      value: 0.90588236
+      objectReference: {fileID: 0}
+    - target: {fileID: 1929250921789902897, guid: 7fef70b3cd94f744180e9f3d760ea9b2, type: 3}
       propertyPath: m_Color.b
       value: 0.008803844
       objectReference: {fileID: 0}
@@ -2356,7 +2360,7 @@ PrefabInstance:
     - target: {fileID: 1929250921789902897, guid: 7fef70b3cd94f744180e9f3d760ea9b2, type: 3}
       propertyPath: m_Material
       value: 
-      objectReference: {fileID: 2100000, guid: d22496696b1e9d040a563e46b9bdc8af, type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 2444727465781438571, guid: 7fef70b3cd94f744180e9f3d760ea9b2, type: 3}
       propertyPath: m_Name
       value: QTEBackground
