@@ -135,4 +135,9 @@ public class UIController : MonoBehaviour
             m_endGameCanvas.SetActive(true);
         }
     }
+
+    public void OnRestartButtonClicked()
+    {
+        GameManager.Instance.RestartGame();
+    }
 }
