@@ -316,6 +316,11 @@ public class QTEBar : MonoBehaviour
 
         if (processedStatus == IBreakable.Status.Broken)
         {
+            GameObject effect = Instantiate(m_VisibleBlockLists[m_CurrentBlockIndex].gameObject, m_VisibleBlockLists[m_CurrentBlockIndex].transform.parent);
+            effect.transform.position = m_VisibleBlockLists[m_CurrentBlockIndex].transform.position;
+            Destroy(effect.GetComponent<Block>());
+            StartCoroutine(AnimateBreakEffect(effect));
+
             foreach (Block block in m_VisibleBlockLists)
             {
                 StartCoroutine(VisibleBlockMoveRotine(block.gameObject.GetComponent<Image>().rectTransform, new Vector2(-100.0f, 0.0f), defaultDuration));
@@ -337,6 +342,69 @@ public class QTEBar : MonoBehaviour
         }
 
         return processedStatus;
+    }
+
+    private IEnumerator AnimateBreakEffect(GameObject target)
+    {
+        // 원본 이미지를 가져옴
+        Image originalImg = target.GetComponent<Image>();
+        Sprite blockSprite = originalImg.sprite;
+        Color blockColor = originalImg.color;
+        Vector2 startPos = target.transform.position;
+
+        // 파편 개수
+        int shardCount = 30;
+        GameObject[] shards = new GameObject[shardCount];
+        Vector2[] velocities = new Vector2[shardCount];
+        float[] rotations = new float[shardCount];
+
+        for (int i = 0; i < shardCount; i++)
+        {
+            // 파편 생성
+            shards[i] = new GameObject("Shard_" + i);
+            shards[i].transform.SetParent(target.transform.parent);
+            shards[i].transform.position = startPos;
+            shards[i].transform.localScale = target.transform.localScale * 0.2f;
+
+            Image shardImg = shards[i].AddComponent<Image>();
+            shardImg.sprite = blockSprite;
+            shardImg.color = blockColor;
+            shardImg.raycastTarget = false;
+
+            shards[i].AddComponent<CanvasGroup>();
+
+            float angle = Random.Range(0f, 360f) * Mathf.Deg2Rad;
+            float speed = Random.Range(200f, 500f);
+            velocities[i] = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * speed;
+            rotations[i] = Random.Range(-360f, 360f);
+        }
+
+        Destroy(target);
+
+        float elapsed = 0f;
+        float duration = 0.5f;
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            float t = elapsed / duration;
+
+            for (int i = 0; i < shardCount; i++)
+            {
+                if (shards[i] == null) continue;
+
+                velocities[i] += Vector2.down * 3000f * Time.deltaTime;
+                shards[i].transform.position += (Vector3)velocities[i] * Time.deltaTime;
+                shards[i].transform.Rotate(Vector3.forward, rotations[i] * Time.deltaTime);
+                shards[i].GetComponent<CanvasGroup>().alpha = 1f - t;
+            }
+            yield return null;
+        }
+
+        foreach (var shard in shards)
+        {
+            if (shard != null) Destroy(shard);
+        }
     }
 
     private System.Collections.IEnumerator VisibleBlockMoveRotine(RectTransform rectTransform, Vector2 offset, float duration)
