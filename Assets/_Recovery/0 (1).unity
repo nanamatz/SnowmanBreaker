@@ -289,6 +289,7 @@ MonoBehaviour:
   moveDistance: 3
   moveSpeed: 0.05
   lastPressedKey: 0
+  gameManager: {fileID: 406063063}
 --- !u!1 &257145458
 GameObject:
   m_ObjectHideFlags: 0
@@ -651,7 +652,7 @@ MonoBehaviour:
   statusOverlay: {fileID: 1026110449}
   moveDistance: 20
   duration: 0.25
-  qteBar: {fileID: 475162910}
+  qteBar: {fileID: 1549493351}
   currentTimer: 0
   blockScore: 0
 --- !u!4 &406063064
@@ -886,28 +887,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14b44f7d49f4d8f47945e8bffbae312a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Snowman
---- !u!1 &475162908 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8262342012742532546, guid: 7fef70b3cd94f744180e9f3d760ea9b2, type: 3}
-  m_PrefabInstance: {fileID: 9168039131143006050}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &475162910
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 475162908}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 70c9b04271cf1b1479d661c2059d4862, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::QTEBar
-  upBlock: {fileID: 5774951772751834822, guid: 2103874b551110843bd4729dc180fdfd, type: 3}
-  downBlock: {fileID: 5532181456517848934, guid: 4a87fdfbb0bf6c14fae37443f554cb14, type: 3}
-  leftBlock: {fileID: 6466618450349032769, guid: 8f2b15bf7dcc4e542bbed6023db33d1f, type: 3}
-  rightBlock: {fileID: 2265094356788330770, guid: c67450a00175e184dbe0e68b25259e78, type: 3}
-  defaultDuration: 0.25
 --- !u!1001 &525833620
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1609,17 +1588,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c12ef479758dfc54dbe6efdc5ae9d751, type: 3}
---- !u!114 &1095392400 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2495959019398931670, guid: 99b7bbbea66ec4d4592db084e674fcba, type: 3}
-  m_PrefabInstance: {fileID: 1765542515}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
 --- !u!1 &1195991603
 GameObject:
   m_ObjectHideFlags: 0
@@ -1744,7 +1712,7 @@ GameObject:
   - component: {fileID: 1251888862}
   - component: {fileID: 1251888861}
   m_Layer: 0
-  m_Name: Ground
+  m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2073,6 +2041,28 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 5677971826377644038, guid: 7fef70b3cd94f744180e9f3d760ea9b2, type: 3}
   m_PrefabInstance: {fileID: 9168039131143006050}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1549493346 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8262342012742532546, guid: 7fef70b3cd94f744180e9f3d760ea9b2, type: 3}
+  m_PrefabInstance: {fileID: 9168039131143006050}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1549493351
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1549493346}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70c9b04271cf1b1479d661c2059d4862, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::QTEBar
+  upBlock: {fileID: 5774951772751834822, guid: 2103874b551110843bd4729dc180fdfd, type: 3}
+  downBlock: {fileID: 5532181456517848934, guid: 4a87fdfbb0bf6c14fae37443f554cb14, type: 3}
+  leftBlock: {fileID: 6466618450349032769, guid: 8f2b15bf7dcc4e542bbed6023db33d1f, type: 3}
+  rightBlock: {fileID: 2265094356788330770, guid: c67450a00175e184dbe0e68b25259e78, type: 3}
+  defaultDuration: 0.25
 --- !u!114 &1582070144 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5004056306712726401, guid: c12ef479758dfc54dbe6efdc5ae9d751, type: 3}
@@ -2478,8 +2468,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UIController
   m_levelText: {fileID: 865038941}
   m_timerText: {fileID: 1042302324}
-  m_remainBlockText: {fileID: 175523573}
-  m_blockScoreText: {fileID: 1095392400}
+  m_remainBlockText: {fileID: 0}
+  m_blockScoreText: {fileID: 0}
   m_endGameCanvas: {fileID: 66190464}
 --- !u!4 &1960496933
 Transform:
@@ -2923,41 +2913,8 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 8262342012742532546, guid: 7fef70b3cd94f744180e9f3d760ea9b2, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 475162910}
+      addedObject: {fileID: 1549493351}
   m_SourcePrefab: {fileID: 100100000, guid: 7fef70b3cd94f744180e9f3d760ea9b2, type: 3}
---- !u!1 &9168039131143006051 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8262342012742532546, guid: 7fef70b3cd94f744180e9f3d760ea9b2, type: 3}
-  m_PrefabInstance: {fileID: 9168039131143006050}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &9168039131143006052
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9168039131143006051}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 70c9b04271cf1b1479d661c2059d4862, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::QTEBar
-  upBlock: {fileID: 5774951772751834822, guid: 2103874b551110843bd4729dc180fdfd, type: 3}
-  downBlock: {fileID: 5532181456517848934, guid: 4a87fdfbb0bf6c14fae37443f554cb14, type: 3}
-  leftBlock: {fileID: 6466618450349032769, guid: 8f2b15bf7dcc4e542bbed6023db33d1f, type: 3}
-  rightBlock: {fileID: 2265094356788330770, guid: c67450a00175e184dbe0e68b25259e78, type: 3}
-  defaultDuration: 0.05
-  m_VisibleBlockLists:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  m_CurrentBlockIndex: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

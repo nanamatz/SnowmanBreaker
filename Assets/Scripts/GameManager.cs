@@ -14,7 +14,9 @@ public class GameManager : MonoBehaviour
     public float moveDistance = 20.0f;
     public float duration = 0.5f;
     public QTEBar qteBar;
-    public float currentTimer = 60.0f;
+
+    public float currentTimer;
+    public int blockScore = 0;
 
     private static GameManager instance;
 
@@ -47,6 +49,7 @@ public class GameManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        currentTimer = 60.0f;
         statusOverlay.SetStatus(snowmans[0]);
         qteBar.SetSnowman(snowmans[0]);
     }
@@ -113,6 +116,14 @@ public class GameManager : MonoBehaviour
 
         statusOverlay.SetStatus(snowmans[0]);
         qteBar.SetSnowman(snowmans[0]);
+
+
+        // UI 업데이트
+        if (UIController.instance != null)
+        {
+            UIController.instance.UpdateLevel();
+            UIController.instance.UpdateRemainBlockCount(); // 레벨 변경 시 남은 블록 수도 업데이트
+        }
     }
 
     private System.Collections.IEnumerator SnowmanMoveRoutine(Transform targetTransform, Vector3 offset)
@@ -147,6 +158,18 @@ public class GameManager : MonoBehaviour
     public bool TryHitProcess(KeyEnum keyEnum)
     {
         IBreakable.Status status = qteBar.TryProcess(keyEnum);
+        if (status == IBreakable.Status.Broken)
+        {
+            // 블록 파괴 성공 시
+            blockScore++;
+            snowmans[0].remainingBlockCount--; // 현재 스노우맨의 블록 수 감소
+
+            // UI 업데이트
+            if (UIController.instance != null)
+            {
+                UIController.instance.UpdateRemainBlockCount();
+            }
+        }
 
         return !(IBreakable.Status.NotInteracted == status);
     }
