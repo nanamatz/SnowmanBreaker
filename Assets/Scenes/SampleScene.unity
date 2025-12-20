@@ -284,7 +284,6 @@ MonoBehaviour:
   moveDistance: 3
   moveSpeed: 0.05
   lastPressedKey: 0
-  gameManager: {fileID: 0}
 --- !u!1 &257145458
 GameObject:
   m_ObjectHideFlags: 0
@@ -1152,7 +1151,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StatusOverlay
   snowman: {fileID: 447924789}
-  hpImage: {fileID: 0}
 --- !u!1 &1042097339 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6762505139307175153, guid: c12ef479758dfc54dbe6efdc5ae9d751, type: 3}
@@ -1355,7 +1353,7 @@ GameObject:
   - component: {fileID: 1251888862}
   - component: {fileID: 1251888861}
   m_Layer: 0
-  m_Name: Sphere
+  m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2389,7 +2387,18 @@ MonoBehaviour:
   downBlock: {fileID: 5532181456517848934, guid: 4a87fdfbb0bf6c14fae37443f554cb14, type: 3}
   leftBlock: {fileID: 6466618450349032769, guid: 8f2b15bf7dcc4e542bbed6023db33d1f, type: 3}
   rightBlock: {fileID: 2265094356788330770, guid: c67450a00175e184dbe0e68b25259e78, type: 3}
-  defaultDuration: 0.25
+  defaultDuration: 0.05
+  m_VisibleBlockLists:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  m_CurrentBlockIndex: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

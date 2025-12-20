@@ -18,7 +18,7 @@ public class StatusOverlay : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        int curSnowmanRemainBlockCount = snowman.remainBlockCount;
+        int curSnowmanRemainBlockCount = snowman.remainingBlockCount;
         if (m_RemainBlockCount == curSnowmanRemainBlockCount)
         {
             return;
@@ -33,6 +33,6 @@ public class StatusOverlay : MonoBehaviour
     {
         this.snowman = snowman;
         m_MaxBlockCount = snowman.maxBlockCount;
-        m_RemainBlockCount = snowman.remainBlockCount;
+        m_RemainBlockCount = snowman.remainingBlockCount;
     }
 }

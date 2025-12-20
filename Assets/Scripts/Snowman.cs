@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class Snowman : MonoBehaviour
 {
@@ -12,15 +13,18 @@ public class Snowman : MonoBehaviour
 
     public int level = 1;
     public int maxBlockCount = 0;
-    public int remainBlockCount = 0;
+    public int remainingBlockCount = 0;
 
-
+    void Awake()
+    {
+        maxBlockCount = GetMaxBlockCount(level);
+        remainingBlockCount = maxBlockCount;
+    }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        maxBlockCount = GetMaxBlockCount(level);
-        remainBlockCount = maxBlockCount;
+
     }
 
     // Update is called once per frame
@@ -41,7 +45,10 @@ public class Snowman : MonoBehaviour
 
     public void OnHit(Collider collision)
     {
-        body.transform.localScale = new Vector3(5.0f, 5.0f * Mathf.Max(0.0f, Mathf.Min(1.0f, remainBlockCount / (float)(level * 4)), 5.0f));
+        remainingBlockCount--;
+        Debug.Log("Remaining Block Count : " + remainingBlockCount.ToString());
+        float newScaleY = (float)remainingBlockCount / maxBlockCount;
+        body.transform.localScale = new Vector3(5.0f, 5.0f * Mathf.Max(0.0f, Mathf.Min(1.0f, newScaleY)), 5.0f);
         int layer = collision.gameObject.layer;
         switch (layer)
         {
@@ -84,9 +91,8 @@ public class Snowman : MonoBehaviour
     {
         level = respawnLevel;
         maxBlockCount = GetMaxBlockCount(respawnLevel);
-        remainBlockCount = maxBlockCount;
+        remainingBlockCount = maxBlockCount;
         body.transform.localScale = new Vector3(5.0f, 5.0f, 5.0f);
-
     }
 
     int GetMaxBlockCount(int level)

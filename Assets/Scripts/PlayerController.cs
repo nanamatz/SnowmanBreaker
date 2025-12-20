@@ -13,7 +13,6 @@ public class PlayerController : MonoBehaviour
     public float moveSpeed = 0.05f;
 
     public KeyEnum lastPressedKey;
-    public GameManager gameManager;
 
     private bool m_IsMoving = false;
 
@@ -40,34 +39,38 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        GameManager gameManager = GameManager.Instance;
         if (m_IsMoving) return;
 
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
-            gameManager.TryHitProcess(KeyEnum.Right);
+            if (gameManager.TryHitProcess(KeyEnum.Right))
+            {
+                StartCoroutine(MovePlayerBodyRoutine(rightArm));
+            }
         }
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        else if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
             if (gameManager.TryHitProcess(KeyEnum.Left))
             {
                 StartCoroutine(MovePlayerBodyRoutine(leftArm));
             }
         }
-        if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.DownArrow))
+        else if (Input.GetKeyDown(KeyCode.UpArrow))
         {
             if (gameManager.TryHitProcess(KeyEnum.Up))
             {
                 StartCoroutine(MovePlayerBodyRoutine(leftLeg));
             }
         }
-        // TODO: implement right leg
-        //if (Input.GetKeyDown(KeyCode.DownArrow))
-        //{
-        //    if(gameManager.TryHitProcess(KeyEnum.Down))
-        //    {
-        //        StartCoroutine(MovePlayerBodyRoutine(leftLeg));
-        //    }
-        //}
+        else if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            if (gameManager.TryHitProcess(KeyEnum.Down))
+            {
+                // TODO: implement right leg
+                StartCoroutine(MovePlayerBodyRoutine(leftLeg));
+            }
+        }
     }
 
     IEnumerator MovePlayerBodyRoutine(GameObject playerBody)
