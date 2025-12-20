@@ -47,7 +47,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         statusOverlay.SetStatus(snowmans[0]);
-        qteBar.RemainingBlockCount = snowmans[0].remainingBlockCount;
+        qteBar.RemainingBlockCount = snowmans[0].remainBlockCount;
     }
     // Update is called once per frame
     void Update()
