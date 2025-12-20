@@ -119,6 +119,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &16348521 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8456755711452375312, guid: 7fef70b3cd94f744180e9f3d760ea9b2, type: 3}
+  m_PrefabInstance: {fileID: 9168039131143006050}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &54714096
 GameObject:
   m_ObjectHideFlags: 0
@@ -2519,6 +2524,7 @@ MonoBehaviour:
   m_remainBlockText: {fileID: 9168039131143006051}
   m_blockScoreText: {fileID: 1095392400}
   m_endGameCanvas: {fileID: 66190464}
+  m_wrongInputHighlight: {fileID: 16348521}
 --- !u!4 &1960496933
 Transform:
   m_ObjectHideFlags: 0
@@ -2871,6 +2877,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1026110448}
     m_Modifications:
+    - target: {fileID: 1929250921789902897, guid: 7fef70b3cd94f744180e9f3d760ea9b2, type: 3}
+      propertyPath: m_Color.b
+      value: 0.008803844
+      objectReference: {fileID: 0}
+    - target: {fileID: 1929250921789902897, guid: 7fef70b3cd94f744180e9f3d760ea9b2, type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1929250921789902897, guid: 7fef70b3cd94f744180e9f3d760ea9b2, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1929250921789902897, guid: 7fef70b3cd94f744180e9f3d760ea9b2, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 2100000, guid: d22496696b1e9d040a563e46b9bdc8af, type: 2}
     - target: {fileID: 2444727465781438571, guid: 7fef70b3cd94f744180e9f3d760ea9b2, type: 3}
       propertyPath: m_Name
       value: QTEBackground

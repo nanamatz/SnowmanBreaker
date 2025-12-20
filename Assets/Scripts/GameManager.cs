@@ -169,6 +169,14 @@ public class GameManager : MonoBehaviour
                 UIController.instance.UpdateRemainBlockCount();
             }
         }
+        else
+        {
+            // 잘못된 입력 시 피드백 효과
+            if (UIController.instance != null)
+            {
+                UIController.instance.ShowWrongInputFeedback();
+            }
+        }
 
         return !(IBreakable.Status.NotInteracted == status);
     }
