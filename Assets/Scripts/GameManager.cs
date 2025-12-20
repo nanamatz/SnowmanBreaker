@@ -17,8 +17,9 @@ public class GameManager : MonoBehaviour
     public CanvasGroup gameCanvasGroup;
     public CanvasGroup endCanvasGroup;
 
+    public CameraShaker mainCameraShaker;
+
     public List<Snowman> snowmans;
-    public StatusOverlay statusOverlay;
     public float moveDistance = 20.0f;
     public float duration = 0.5f;
     public QTEBar qteBar;
@@ -27,6 +28,7 @@ public class GameManager : MonoBehaviour
     public int blockScore = 0;
 
     private static GameManager instance;
+    [SerializeField] public int reverseBlockMinLevel = 4; // reverse block이 등장하는 최소 레벨
 
     public static GameManager Instance
     {
@@ -77,7 +79,6 @@ public class GameManager : MonoBehaviour
 
         currentTimer = 60.0f;
         gameCanvasGroup.gameObject.SetActive(true);
-        statusOverlay.SetStatus(snowmans[0]);
         qteBar.SetSnowman(snowmans[0]);
     }
 
@@ -164,7 +165,6 @@ public class GameManager : MonoBehaviour
         var deadSnowman = snowmans[snowmans.Count - 1];
         deadSnowman.Respawn(deadSnowman.level + snowmans.Count);
 
-        statusOverlay.SetStatus(snowmans[0]);
         qteBar.SetSnowman(snowmans[0]);
 
 
@@ -184,24 +184,21 @@ public class GameManager : MonoBehaviour
 
         while (elapsed < duration)
         {
-            // �ð� �帧�� ���� ���� ��� (0 ~ 1)
             float t = elapsed / duration;
 
-            // �ε巯�� ����/���� ȿ���� ���� ��� (���� ����)
-            // t = t * t * (3f - 2f * t); 
+             t = t * t * (3f - 2f * t); 
 
             targetTransform.localPosition = Vector3.Lerp(startPos, endPos, t);
 
             elapsed += Time.deltaTime;
 
-            yield return null; // ���� �����ӱ��� ���
+            yield return null; 
         }
 
-        // ���� ��ġ ����
         targetTransform.localPosition = endPos;
         if (endPos.x < -10.0f)
         {
-            targetTransform.localPosition = new Vector3(40.0f, 0.0f, 0.0f);
+            targetTransform.localPosition = new Vector3(40.0f, -3.1f, -1.8f);
         }
     }
 
@@ -225,6 +222,7 @@ public class GameManager : MonoBehaviour
             if (UIController.instance != null)
             {
                 UIController.instance.ShowWrongInputFeedback();
+                mainCameraShaker.ShakeCamera();
             }
         }
 

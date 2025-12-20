@@ -12,10 +12,10 @@ public class QTEBar : MonoBehaviour
     public GameObject downBlock = null;
     public GameObject leftBlock = null;
     public GameObject rightBlock = null;
-    //public GameObject reverseUpBlock = null;
-    //public GameObject reverseDownBlock = null;
-    //public GameObject reverseLeftBlock = null;
-    //public GameObject reverseRightBlock = null;
+    public GameObject reverseUpBlock = null;
+    public GameObject reverseDownBlock = null;
+    public GameObject reverseLeftBlock = null;
+    public GameObject reverseRightBlock = null;
 
     public float defaultDuration = 0.05f;
 
@@ -29,6 +29,10 @@ public class QTEBar : MonoBehaviour
     private Queue<Block> m_DownBlocks = new Queue<Block>();
     private Queue<Block> m_LeftBlocks = new Queue<Block>();
     private Queue<Block> m_RightBlocks = new Queue<Block>();
+    private Queue<Block> m_ReverseUpBlocks = new Queue<Block>();
+    private Queue<Block> m_ReverseDownBlocks = new Queue<Block>();
+    private Queue<Block> m_ReverseLeftBlocks = new Queue<Block>();
+    private Queue<Block> m_ReverseRightBlocks = new Queue<Block>();
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
@@ -39,6 +43,10 @@ public class QTEBar : MonoBehaviour
         downBlock.GetComponent<Block>().BoundKeyEnum = KeyEnum.Down;
         leftBlock.GetComponent<Block>().BoundKeyEnum = KeyEnum.Left;
         rightBlock.GetComponent<Block>().BoundKeyEnum = KeyEnum.Right;
+        reverseUpBlock.GetComponent<Block>().BoundKeyEnum = KeyEnum.reverseUp;
+        reverseDownBlock.GetComponent<Block>().BoundKeyEnum = KeyEnum.reverseDown;
+        reverseLeftBlock.GetComponent<Block>().BoundKeyEnum = KeyEnum.reverseLeft;
+        reverseRightBlock.GetComponent<Block>().BoundKeyEnum = KeyEnum.reverseRight;
 
         for (int i = 0; i < 6; i++)
         {
@@ -60,11 +68,32 @@ public class QTEBar : MonoBehaviour
             rightBlockInstantiated.transform.SetParent(transform, false);
             rightBlockInstantiated.GetComponent<Block>().BoundKeyEnum = KeyEnum.Right;
 
+            GameObject reverseUpBlockInstantiated = GameObject.Instantiate(reverseUpBlock);
+            reverseUpBlockInstantiated.transform.SetParent(transform, false);
+            reverseUpBlockInstantiated.GetComponent<Block>().BoundKeyEnum = KeyEnum.reverseUp;
+
+            GameObject reverseDownBlockInstantiated = GameObject.Instantiate(reverseDownBlock);
+            reverseDownBlockInstantiated.transform.SetParent(transform, false);
+            reverseDownBlockInstantiated.GetComponent<Block>().BoundKeyEnum = KeyEnum.reverseDown;
+
+            GameObject reverseLeftBlockInstantiated = GameObject.Instantiate(reverseLeftBlock);
+            reverseLeftBlockInstantiated.transform.SetParent(transform, false);
+            reverseLeftBlockInstantiated.GetComponent<Block>().BoundKeyEnum = KeyEnum.reverseLeft;
+
+            GameObject reverseRightBlockInstantiated = GameObject.Instantiate(reverseRightBlock); ;
+            reverseRightBlockInstantiated.transform.SetParent(transform, false);
+            reverseRightBlockInstantiated.GetComponent<Block>().BoundKeyEnum = KeyEnum.reverseRight;
+
 
             m_UpBlocks.Enqueue(upBlockInstantiated.GetComponent<Block>());
             m_DownBlocks.Enqueue(downBlockInstantiated.GetComponent<Block>());
             m_LeftBlocks.Enqueue(leftBlockInstantiated.GetComponent<Block>());
             m_RightBlocks.Enqueue(rightBlockInstantiated.GetComponent<Block>());
+
+            m_ReverseUpBlocks.Enqueue(reverseUpBlockInstantiated.GetComponent<Block>());
+            m_ReverseDownBlocks.Enqueue(reverseDownBlockInstantiated.GetComponent<Block>());
+            m_ReverseLeftBlocks.Enqueue(reverseLeftBlockInstantiated.GetComponent<Block>());
+            m_ReverseRightBlocks.Enqueue(reverseRightBlockInstantiated.GetComponent<Block>());
         }
 
         //InitVisibleBlock();
@@ -116,9 +145,13 @@ public class QTEBar : MonoBehaviour
 
         Block block = null;
         bool hasFound = false;
+        bool canUseReverseBlocks = (m_Snowman != null && GameManager.Instance != null &&
+                                   m_Snowman.level >= GameManager.Instance.reverseBlockMinLevel);
+
         while (!hasFound)
         {
-            int randomIndex = Random.Range(0, 4);
+            int maxRange = canUseReverseBlocks ? 8 : 4; // 레벨에 따라 범위 조정
+            int randomIndex = Random.Range(0, maxRange);
             switch (randomIndex)
             {
                 case 0:
@@ -163,6 +196,50 @@ public class QTEBar : MonoBehaviour
                         hasFound = true;
                         break;
                     }
+                case 4:
+                    {
+                        if (m_ReverseUpBlocks.Count == 0)
+                        {
+                            continue;
+                        }
+                        block = m_ReverseUpBlocks.Dequeue();
+                        block.BoundKeyEnum = KeyEnum.reverseUp;
+                        hasFound = true;
+                        break;
+                    }
+                case 5:
+                    {
+                        if (m_ReverseDownBlocks.Count == 0)
+                        {
+                            continue;
+                        }
+                        block = m_ReverseDownBlocks.Dequeue();
+                        block.BoundKeyEnum = KeyEnum.reverseDown;
+                        hasFound = true;
+                        break;
+                    }
+                case 6:
+                    {
+                        if (m_ReverseLeftBlocks.Count == 0)
+                        {
+                            continue;
+                        }
+                        block = m_ReverseLeftBlocks.Dequeue();
+                        block.BoundKeyEnum = KeyEnum.reverseLeft;
+                        hasFound = true;
+                        break;
+                    }
+                case 7:
+                    {
+                        if (m_ReverseRightBlocks.Count == 0)
+                        {
+                            continue;
+                        }
+                        block = m_ReverseRightBlocks.Dequeue();
+                        block.BoundKeyEnum = KeyEnum.reverseRight;
+                        hasFound = true;
+                        break;
+                    }
             }
         }
         return block;
@@ -197,6 +274,26 @@ public class QTEBar : MonoBehaviour
                 case KeyEnum.Right:
                     {
                         m_RightBlocks.Enqueue(block);
+                        break;
+                    }
+                case KeyEnum.reverseUp:
+                    {
+                        m_ReverseUpBlocks.Enqueue(block);
+                        break;
+                    }
+                case KeyEnum.reverseDown:
+                    {
+                        m_ReverseDownBlocks.Enqueue(block);
+                        break;
+                    }
+                case KeyEnum.reverseLeft:
+                    {
+                        m_ReverseLeftBlocks.Enqueue(block);
+                        break;
+                    }
+                case KeyEnum.reverseRight:
+                    {
+                        m_ReverseRightBlocks.Enqueue(block);
                         break;
                     }
                 default:

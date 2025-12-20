@@ -5,16 +5,19 @@ using System.Collections;
 public class UIController : MonoBehaviour
 {
     public static UIController instance;
-    [SerializeField] private TextMeshProUGUI m_levelText;
-    [SerializeField] private TextMeshProUGUI m_timerText;
-    [SerializeField] private TextMeshProUGUI m_remainBlockText;
-    [SerializeField] private TextMeshProUGUI m_blockScoreText;
+    [SerializeField] private TextMeshProUGUI m_LevelText;
+    [SerializeField] private TextMeshProUGUI m_TimerText;
+    [SerializeField] private TextMeshProUGUI m_RemainBlockText;
+    [SerializeField] private TextMeshProUGUI m_BlockScoreText;
 
-    [SerializeField] private GameObject m_endGameCanvas;
-    [SerializeField] private GameObject m_wrongInputHighlight;
+    [SerializeField] private GameObject m_EndGameCanvas;
+    [SerializeField] private GameObject m_WrongInputHighlight;
+
+    [SerializeField] private BlockAlert m_BlockAlert;
 
     private Color m_originalTimerColor;
     private bool m_isTimerAnimating = false;
+
 
 
     void Awake()
@@ -31,9 +34,9 @@ public class UIController : MonoBehaviour
 
     void Start()
     {
-        if (m_timerText != null)
+        if (m_TimerText != null)
         {
-            m_originalTimerColor = m_timerText.color;
+            m_originalTimerColor = m_TimerText.color;
         }
         UpdateTimer();
         UpdateLevel();
@@ -47,12 +50,12 @@ public class UIController : MonoBehaviour
 
     void UpdateTimer()
     {
-        if (m_timerText != null && GameManager.Instance != null)
+        if (m_TimerText != null && GameManager.Instance != null)
         {
             float currentTime = GameManager.Instance.currentTimer;
             int seconds = Mathf.FloorToInt(currentTime);
             int milliseconds = Mathf.FloorToInt((currentTime - seconds) * 100);
-            m_timerText.text = string.Format("{0:00}:{1:00}", seconds, milliseconds);
+            m_TimerText.text = string.Format("{0:00}:{1:00}", seconds, milliseconds);
 
             // 5초 이하일 때 긴박감 연출
             if (currentTime <= 5f && currentTime > 0)
@@ -69,8 +72,8 @@ public class UIController : MonoBehaviour
                 {
                     m_isTimerAnimating = false;
                     StopAllCoroutines();
-                    m_timerText.color = m_originalTimerColor;
-                    m_timerText.transform.localScale = Vector3.one;
+                    m_TimerText.color = m_originalTimerColor;
+                    m_TimerText.transform.localScale = Vector3.one;
                 }
             }
         }
@@ -78,18 +81,18 @@ public class UIController : MonoBehaviour
 
     public void UpdateRemainBlockCount()
     {
-        if (m_remainBlockText != null && GameManager.Instance != null && GameManager.Instance.snowmans.Count > 0)
+        if (m_RemainBlockText != null && GameManager.Instance != null && GameManager.Instance.snowmans.Count > 0)
         {
             int remainBlockCount = GameManager.Instance.snowmans[0].remainingBlockCount;
-            m_remainBlockText.text = remainBlockCount.ToString();
+            m_RemainBlockText.text = remainBlockCount.ToString();
         }
     }
 
     void UpdateBlockScore()
     {
-        if (m_blockScoreText != null && GameManager.Instance != null)
+        if (m_BlockScoreText != null && GameManager.Instance != null)
         {
-            m_blockScoreText.text = GameManager.Instance.blockScore.ToString();
+            m_BlockScoreText.text = GameManager.Instance.blockScore.ToString();
         }
     }
 
@@ -98,13 +101,13 @@ public class UIController : MonoBehaviour
         while (m_isTimerAnimating)
         {
             // 빨간색으로 변경하며 크기 애니메이션
-            m_timerText.color = Color.red;
+            m_TimerText.color = Color.red;
 
             // 크기 확대
             for (float t = 0; t < 0.5f; t += Time.deltaTime)
             {
                 float scale = Mathf.Lerp(1f, 1.2f, t / 0.5f);
-                m_timerText.transform.localScale = Vector3.one * scale;
+                m_TimerText.transform.localScale = Vector3.one * scale;
                 yield return null;
             }
 
@@ -112,7 +115,7 @@ public class UIController : MonoBehaviour
             for (float t = 0; t < 0.5f; t += Time.deltaTime)
             {
                 float scale = Mathf.Lerp(1.2f, 1f, t / 0.5f);
-                m_timerText.transform.localScale = Vector3.one * scale;
+                m_TimerText.transform.localScale = Vector3.one * scale;
                 yield return null;
             }
         }
@@ -120,20 +123,20 @@ public class UIController : MonoBehaviour
 
     public void UpdateLevel()
     {
-        if (m_levelText != null && GameManager.Instance != null && GameManager.Instance.snowmans.Count > 0)
+        if (m_LevelText != null && GameManager.Instance != null && GameManager.Instance.snowmans.Count > 0)
         {
             int currentLevel = GameManager.Instance.snowmans[0].level;
-            m_levelText.text = currentLevel.ToString();
+            m_LevelText.text = currentLevel.ToString();
         }
     }
 
     public void ShowEndGameCanvas()
     {
-        if (m_endGameCanvas.activeSelf == false)
+        if (m_EndGameCanvas.activeSelf == false)
         {
             UpdateBlockScore(); // 게임 종료 시 최종 점수 업데이트
 
-            m_endGameCanvas.SetActive(true);
+            m_EndGameCanvas.SetActive(true);
         }
     }
 
@@ -144,21 +147,21 @@ public class UIController : MonoBehaviour
 
     public void ShowWrongInputFeedback()
     {
-        if (m_wrongInputHighlight != null)
+        if (m_BlockAlert != null)
         {
-            StartCoroutine(WrongInputHighlightEffect());
+            m_BlockAlert.Alert();
         }
     }
 
     IEnumerator WrongInputHighlightEffect()
     {
-        if (m_wrongInputHighlight == null) yield break;
+        if (m_WrongInputHighlight == null) yield break;
 
-        m_wrongInputHighlight.SetActive(true);
+        m_WrongInputHighlight.SetActive(true);
         
         float duration = 1.0f;
         float elapsed = 0f;
-        Vector3 originalScale = m_wrongInputHighlight.transform.localScale;
+        Vector3 originalScale = m_WrongInputHighlight.transform.localScale;
         
         // 반짝반짝 + 크기 변화 효과
         while (elapsed < duration)
@@ -166,7 +169,7 @@ public class UIController : MonoBehaviour
             float progress = elapsed / duration;
             
             // 반짝반짝 효과 (알파 값 변화)
-            CanvasGroup canvasGroup = m_wrongInputHighlight.GetComponent<CanvasGroup>();
+            CanvasGroup canvasGroup = m_WrongInputHighlight.GetComponent<CanvasGroup>();
             if (canvasGroup != null)
             {
                 float alpha = Mathf.PingPong(Time.time * 8f, 1f); // 빠른 깜빡임
@@ -175,19 +178,19 @@ public class UIController : MonoBehaviour
             
             // 크기 변화 효과 (펄스)
             float scale = 1f + Mathf.Sin(Time.time * 10f) * 0.2f; // 펄스 효과
-            m_wrongInputHighlight.transform.localScale = originalScale * scale;
+            m_WrongInputHighlight.transform.localScale = originalScale * scale;
             
             elapsed += Time.deltaTime;
             yield return null;
         }
         
         // 원래 상태로 복구 후 비활성화
-        m_wrongInputHighlight.transform.localScale = originalScale;
-        CanvasGroup finalCanvasGroup = m_wrongInputHighlight.GetComponent<CanvasGroup>();
+        m_WrongInputHighlight.transform.localScale = originalScale;
+        CanvasGroup finalCanvasGroup = m_WrongInputHighlight.GetComponent<CanvasGroup>();
         if (finalCanvasGroup != null)
         {
             finalCanvasGroup.alpha = 1f;
         }
-        m_wrongInputHighlight.SetActive(false);
+        m_WrongInputHighlight.SetActive(false);
     }
 }
