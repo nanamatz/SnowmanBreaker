@@ -2246,7 +2246,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2316651251398329326, guid: 54a520a3dda4ff2479595a5fc572a73b, type: 3}
       propertyPath: chaseDistance
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2316651251398329326, guid: 54a520a3dda4ff2479595a5fc572a73b, type: 3}
       propertyPath: maxChaseDistance
@@ -2266,7 +2266,7 @@ PrefabInstance:
       objectReference: {fileID: 330585543}
     - target: {fileID: 2733531830628926194, guid: 54a520a3dda4ff2479595a5fc572a73b, type: 3}
       propertyPath: chaseDistance
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2733531830628926194, guid: 54a520a3dda4ff2479595a5fc572a73b, type: 3}
       propertyPath: maxChaseDistance
@@ -2290,7 +2290,7 @@ PrefabInstance:
       objectReference: {fileID: 330585543}
     - target: {fileID: 3237944758877485454, guid: 54a520a3dda4ff2479595a5fc572a73b, type: 3}
       propertyPath: chaseDistance
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3237944758877485454, guid: 54a520a3dda4ff2479595a5fc572a73b, type: 3}
       propertyPath: maxChaseDistance
@@ -2310,7 +2310,7 @@ PrefabInstance:
       objectReference: {fileID: 330585543}
     - target: {fileID: 3476014996585268541, guid: 54a520a3dda4ff2479595a5fc572a73b, type: 3}
       propertyPath: chaseDistance
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3476014996585268541, guid: 54a520a3dda4ff2479595a5fc572a73b, type: 3}
       propertyPath: maxChaseDistance
@@ -2330,7 +2330,7 @@ PrefabInstance:
       objectReference: {fileID: 330585543}
     - target: {fileID: 4605440976453356854, guid: 54a520a3dda4ff2479595a5fc572a73b, type: 3}
       propertyPath: chaseDistance
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4605440976453356854, guid: 54a520a3dda4ff2479595a5fc572a73b, type: 3}
       propertyPath: maxChaseDistance
@@ -2354,7 +2354,7 @@ PrefabInstance:
       objectReference: {fileID: 330585543}
     - target: {fileID: 5268894639341589237, guid: 54a520a3dda4ff2479595a5fc572a73b, type: 3}
       propertyPath: chaseDistance
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5268894639341589237, guid: 54a520a3dda4ff2479595a5fc572a73b, type: 3}
       propertyPath: maxChaseDistance
@@ -2378,7 +2378,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6162216810778202151, guid: 54a520a3dda4ff2479595a5fc572a73b, type: 3}
       propertyPath: chaseDistance
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6162216810778202151, guid: 54a520a3dda4ff2479595a5fc572a73b, type: 3}
       propertyPath: maxChaseDistance
@@ -2398,7 +2398,7 @@ PrefabInstance:
       objectReference: {fileID: 330585543}
     - target: {fileID: 6640616937072970717, guid: 54a520a3dda4ff2479595a5fc572a73b, type: 3}
       propertyPath: chaseDistance
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6640616937072970717, guid: 54a520a3dda4ff2479595a5fc572a73b, type: 3}
       propertyPath: maxChaseDistance
