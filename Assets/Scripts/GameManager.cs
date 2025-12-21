@@ -223,7 +223,7 @@ public class GameManager : MonoBehaviour
     public bool TryHitProcess(KeyEnum keyEnum)
     {
         IBreakable.Status status = qteBar.TryProcess(keyEnum);
-        if (status == IBreakable.Status.Broken)
+        if (status != IBreakable.Status.NotInteracted)
         {
             // 블록 파괴 성공 시
             blockScore++;
