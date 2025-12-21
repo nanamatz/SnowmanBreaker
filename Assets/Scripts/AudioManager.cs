@@ -14,6 +14,8 @@ public class AudioManager : MonoBehaviour
 
     public AudioClip buttonClickClip;
 
+    public List<AudioClip> hororSoundClips;
+
     void Awake()
     {
         if (instance == null)
@@ -48,6 +50,29 @@ public class AudioManager : MonoBehaviour
         else
         {
             Debug.LogWarning("Button click source or clip is null!");
+        }
+    }
+
+    public void PlayRandomHororSound()
+    {
+        if (generalAudioSource == null || hororSoundClips.Count == 0)
+        {
+            Debug.LogWarning("No horror sound sources or clips available!");
+            return;
+        }
+
+        int clipIndex = Random.Range(0, hororSoundClips.Count);
+
+        AudioClip clip = hororSoundClips[clipIndex];
+
+        if (generalAudioSource != null && clip != null)
+        {
+            Debug.Log($"Playing random horror sound: {clip.name}");
+            generalAudioSource.PlayOneShot(clip);
+        }
+        else
+        {
+            Debug.LogWarning("Selected audio source or clip is null!");
         }
     }
 

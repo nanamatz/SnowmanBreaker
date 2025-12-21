@@ -136,7 +136,7 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        if(Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
             Application.Quit();
         }
@@ -248,8 +248,9 @@ public class GameManager : MonoBehaviour
             {
                 UIController.instance.ShowWrongInputFeedback();
                 mainCameraShaker.ShakeCamera();
+                AudioManager.instance.PlayRandomHororSound();
                 Chaser[] chasers = Object.FindObjectsByType<Chaser>(FindObjectsSortMode.None);
-                foreach(Chaser chaser in chasers)
+                foreach (Chaser chaser in chasers)
                 {
                     chaser.Chase();
                 }
