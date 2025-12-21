@@ -2,15 +2,12 @@ using UnityEngine;
 
 public class ReverseBlock : Block
 {
-    private KeyEnum m_VisibleKeyEnum;
     public new KeyEnum BoundKeyEnum
     {
-        get => m_VisibleKeyEnum;
+        get => m_BoundKeyEnum;
         set
         {
-            m_VisibleKeyEnum = value;
-            int keyEnumCount = (int)KeyEnum.Count;
-            m_BoundKeyEnum = (KeyEnum)(((int)value + (keyEnumCount / 2)) % keyEnumCount);
+            m_BoundKeyEnum = value;
         }
     }
 
@@ -26,8 +23,32 @@ public class ReverseBlock : Block
 
     }
 
-    public new IBreakable.Status Process(KeyEnum keyEnum )
+    public override Status Process(KeyEnum visibleKeyEnum)
     {
-        return m_BoundKeyEnum == keyEnum ? IBreakable.Status.Broken : IBreakable.Status.NotInteracted;
+        KeyEnum reversedKeyEnum = visibleKeyEnum;
+        switch (visibleKeyEnum)
+        {
+        case KeyEnum.Up:
+        {
+            reversedKeyEnum = KeyEnum.ReverseDown;
+            break;
+        }
+        case KeyEnum.Down:
+        {
+            reversedKeyEnum = KeyEnum.ReverseUp;
+            break;
+        }
+        case KeyEnum.Left:
+        {
+            reversedKeyEnum = KeyEnum.ReverseRight;
+            break;
+        }
+        case KeyEnum.Right:
+        {
+            reversedKeyEnum = KeyEnum.ReverseLeft;
+            break;
+        }
+        }
+        return m_BoundKeyEnum == reversedKeyEnum ? Status.Broken : Status.NotInteracted;
     }
 }

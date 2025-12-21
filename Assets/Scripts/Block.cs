@@ -1,18 +1,14 @@
 using UnityEngine;
-public interface IBreakable
+
+public class Block : MonoBehaviour
 {
-    enum Status
+    public enum Status
     {
         Broken = 0,
         Interacted = 1,
         NotInteracted = 2,
     }
-
-    public Status Process(KeyEnum keyEnum);
-}
-
-public class Block : MonoBehaviour, IBreakable
-{
+   
     [SerializeField] protected KeyEnum m_BoundKeyEnum;
     public KeyEnum BoundKeyEnum { get => m_BoundKeyEnum; set => m_BoundKeyEnum = value;  }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -28,8 +24,9 @@ public class Block : MonoBehaviour, IBreakable
     }
 
 
-    public IBreakable.Status Process(KeyEnum keyEnum)
+    public virtual Status Process(KeyEnum keyEnum)
     {
-        return keyEnum == m_BoundKeyEnum ? IBreakable.Status.Broken : IBreakable.Status.NotInteracted;
+
+        return keyEnum == m_BoundKeyEnum ? Status.Broken : Status.NotInteracted;
     }
 }

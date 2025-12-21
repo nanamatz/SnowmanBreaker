@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
     public float moveDistance = 20.0f;
     public float duration = 0.5f;
     public QTEBar qteBar;
+    public bool isInitialized = false;
 
     public float currentTimer;
     public int blockScore = 0;
@@ -99,7 +100,6 @@ public class GameManager : MonoBehaviour
         currentTimer = 60.0f;
         gameCanvasGroup.gameObject.SetActive(true);
         qteBar.SetSnowman(snowmans[0]);
-
         cameraAnimator.enabled = false;
     }
 
@@ -222,8 +222,8 @@ public class GameManager : MonoBehaviour
 
     public bool TryHitProcess(KeyEnum keyEnum)
     {
-        IBreakable.Status status = qteBar.TryProcess(keyEnum);
-        if (status != IBreakable.Status.NotInteracted)
+        Block.Status status = qteBar.TryProcess(keyEnum);
+        if (status == Block.Status.Broken)
         {
             // 블록 파괴 성공 시
             blockScore++;
@@ -241,7 +241,7 @@ public class GameManager : MonoBehaviour
                 UIController.instance.UpdateRemainBlockCount();
             }
         }
-        else
+        else if(status == Block.Status.NotInteracted)
         {
             // 잘못된 입력 시 피드백 효과
             if (UIController.instance != null)
@@ -257,7 +257,7 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        return !(IBreakable.Status.NotInteracted == status);
+        return !(Block.Status.NotInteracted == status);
     }
 
     public void RestartGame()

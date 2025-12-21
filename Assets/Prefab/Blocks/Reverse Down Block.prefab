@@ -86,7 +86,7 @@ GameObject:
   - component: {fileID: 1853725379856251738}
   - component: {fileID: 8087088924893163340}
   - component: {fileID: 8981727710891662049}
-  - component: {fileID: -4444367218100367048}
+  - component: {fileID: 5481863422174215638}
   m_Layer: 5
   m_Name: Reverse Down Block
   m_TagString: Block
@@ -152,7 +152,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &-4444367218100367048
+--- !u!114 &5481863422174215638
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -161,7 +161,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6466618450349032769}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f0458b8f5149f2b4dbf7ad0d87b09be5, type: 3}
+  m_Script: {fileID: 11500000, guid: a74cc236cb9bc7843a71c3cd0564940d, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Block
-  m_BoundKeyEnum: 6
+  m_EditorClassIdentifier: Assembly-CSharp::ReverseBlock
+  m_BoundKeyEnum: 0
