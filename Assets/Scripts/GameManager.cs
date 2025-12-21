@@ -26,7 +26,7 @@ public class GameManager : MonoBehaviour
 
     public float currentTimer;
     public int blockScore = 0;
-    public bool isGameStarted = false;
+    private bool m_IsRunning = false;
 
     private static GameManager instance;
     [SerializeField] public int reverseBlockMinLevel = 4; // reverse block이 등장하는 최소 레벨
@@ -47,7 +47,23 @@ public class GameManager : MonoBehaviour
     {
         AudioManager.instance.PlayBackgroundMusic();
         StartCoroutine(FadeOutStartUI());
-        isGameStarted = true;
+        m_IsRunning = true;
+    }
+    public void GameOver()
+    {
+        m_IsRunning = false;
+        // 게임 오버 처리 로직 추가
+        if (UIController.instance != null)
+        {
+            UIController.instance.ShowEndGameCanvas();
+        }
+
+        // PlayerController 비활성화
+        PlayerController playerController = FindFirstObjectByType<PlayerController>();
+        if (playerController != null)
+        {
+            playerController.enabled = false;
+        }
     }
 
     private IEnumerator FadeOutStartUI()
@@ -112,7 +128,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (false == isGameStarted)
+        if (false == m_IsRunning)
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
@@ -131,7 +147,7 @@ public class GameManager : MonoBehaviour
 
     void UpdateTimer()
     {
-        if (currentTimer > 0)
+        if (m_IsRunning && currentTimer > 0)
         {
             currentTimer -= Time.deltaTime;
             if (currentTimer <= 0)
@@ -139,22 +155,6 @@ public class GameManager : MonoBehaviour
                 currentTimer = 0;
                 GameOver();
             }
-        }
-    }
-
-    void GameOver()
-    {
-        // 게임 오버 처리 로직 추가
-        if (UIController.instance != null)
-        {
-            UIController.instance.ShowEndGameCanvas();
-        }
-
-        // PlayerController 비활성화
-        PlayerController playerController = FindFirstObjectByType<PlayerController>();
-        if (playerController != null)
-        {
-            playerController.enabled = false;
         }
     }
 
@@ -248,6 +248,11 @@ public class GameManager : MonoBehaviour
             {
                 UIController.instance.ShowWrongInputFeedback();
                 mainCameraShaker.ShakeCamera();
+                Chaser[] chasers = Object.FindObjectsByType<Chaser>(FindObjectsSortMode.None);
+                foreach(Chaser chaser in chasers)
+                {
+                    chaser.Chase();
+                }
             }
         }
 
