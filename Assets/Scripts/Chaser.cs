@@ -9,6 +9,7 @@ public class Chaser : MonoBehaviour
     public float maxChaseDistance = 10.0f;
     public float chaseDistance = 10.0f;
     public float duration = 0.5f;
+    public float minimumDistanceCoef = 0.0f;
 
     public bool isMainChaser = false;
 
@@ -50,7 +51,7 @@ public class Chaser : MonoBehaviour
         // 방향 벡터 계산 (정규화)
         Vector3 direction = (targetTransform.position - startPos).normalized;
         // 최종 목적지 계산: 시작점 + (방향 * 거리)
-        Vector3 endPos = startPos + (direction * distance);
+        Vector3 endPos = startPos + (direction * (distance - minimumDistanceCoef)/* Coef */);
 
         float elapsed = 0f;
 
